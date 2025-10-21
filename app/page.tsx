@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import ThreeScene from "./components/Circle";
 import InfiniteScroll from "./components/Swiper";
+import LatestProjects from "./components/LatestProjects";
 
 
 export const metadata: Metadata = {
@@ -125,7 +126,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-      
+      <LatestProjects limit={4} />
     </main>
   );
 }
