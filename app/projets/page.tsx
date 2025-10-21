@@ -19,7 +19,6 @@ export default function ProjectsPage() {
           </Link>
         ))}
       </div>
-      <LatestProjects limit={6} />
     </main>
   );
 }

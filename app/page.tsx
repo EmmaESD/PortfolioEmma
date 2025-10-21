@@ -126,7 +126,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-      <LatestProjects limit={6} />
+      <LatestProjects limit={4} />
     </main>
   );
 }

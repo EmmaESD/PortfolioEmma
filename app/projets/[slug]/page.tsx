@@ -48,7 +48,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           alt={project.title}
           width={600}
           height={300}
-          className="object-cover"
+          className="object-cover rounded-2xl"
         />
         <div>
           <h2 className='text-lg'>Technos utilisées</h2>
@@ -65,7 +65,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="flex w-full justify-center">
           <ProjectLinks project={project} />
       </div>
-      <LatestProjects limit={6} />
+      <LatestProjects limit={4} />
     </main>
   );
 }
