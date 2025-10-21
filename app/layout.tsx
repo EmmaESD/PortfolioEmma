@@ -1,6 +1,24 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Jaro, JetBrains_Mono } from 'next/font/google'
+import NavBar from "./components/NavBar";
+
+// Configuration Jaro
+const jaro = Jaro({
+  subsets: ['latin'],
+  variable: '--font-jaro',
+  weight: ['400'], // Jaro n'a qu'un seul poids disponible
+  display: 'swap',
+})
+
+// Configuration JetBrains Mono
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  weight: ['300', '400', '600', '800'], // Tous les poids que vous utilisez
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +43,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable}antialiased`}
       >
+        <NavBar/>
         {children}
       </body>
     </html>

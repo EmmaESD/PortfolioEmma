@@ -1,103 +1,131 @@
+
+import { Metadata } from "next";
 import Image from "next/image";
+import ThreeScene from "./components/Circle";
+import InfiniteScroll from "./components/Swiper";
 
-export default function Home() {
+
+export const metadata: Metadata = {
+  title: "Emma Vaysse - Portfolio",
+  description: "Portfolio d'Emma Vaysse - Développeuse Web",
+};
+
+const items = [
+  { content: <p className="text-white">React</p> },
+  { content: <p className="text-white">Next.js</p> },
+  { content: <p className="text-white">Tailwind</p> },
+  { content: <p className="text-white">TypeScript</p> },
+  { content: <p className="text-white">Node.js</p> },
+  { content: <p className="text-white">Express</p> },
+  { content: <p className="text-white">Docker</p> },
+  { content: <p className="text-white">PostgreSQL</p> },
+  { content: <p className="text-white">Git</p> },
+];
+
+export default async function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="w-full m-0 typography">
+      <header className="w-full flex flex-col justify-start gap-44 items-center h-screen">
+      <ThreeScene />
+        <div className="flex flex-col items-start justify-center mt-20 gap-0.5 z-100">
+       
+          <h1>PORTFOLIO</h1>
+          <div className="flex flex-col items-start justify-center">
+            <h2>Emma VAYSSE</h2>
+            <h2>DEVELOPPEUSE WEB</h2>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <section className="w-full">
+            <div className="h-[65px] text-white bg-black pt-5">
+          <InfiniteScroll
+            items={items}
+            isTilted={true}
+            autoplay={true}
+            autoplaySpeed={0.6}
+            autoplayDirection="left"
+            pauseOnHover={true}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          </div>
+        </section>
+        </header>
+        <section>
+          <div className="flex flex-col p-16 items-center gap-15">
+            <h3>Qui suis-je ?</h3>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="flex flex-col justify-center items-start gap-16">
+                
+                  <div className="flex items-start">
+                    <div>
+                    <h5>Mes Passions</h5>
+                    <p>De la peinture, à l'écriture en passant pas le jardinage, j'aime créer, innover, coder et découvrir de nouvelles disciplines qui me donnent envie chaque jour de me surpasser.</p>
+                  </div>
+                  <Image
+                    src="/assets/arrow.svg"
+                    alt="arrow"
+                    width={88}
+                    height={100}
+                    className="float"
+                  />
+                </div>
+
+                <div className="flex items-start">
+                  <div>
+                    <h5>Mes Compétences</h5>
+                    <p>Je connais les langages de base du web, du front au back. J'ai également des compétences dans le webdesign avec notamment le logiciel figma ou illustrator et photoshop pour d'autres créations. Mes expériences passées m'ont également permis de développer des compétences humaines tel que le travail d'équipe, l'analyse des besoins et la rédaction.</p>
+                  </div>
+                  <Image
+                    src="/assets/arrow.svg"
+                    alt="arrow"
+                    width={88}
+                    height={100}
+                    className="transform scale-y-[-1] float"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col justify-start items-center gap-10">
+                <Image 
+                  src="/assets/whoami.png" 
+                  alt="photo de profil" 
+                  width={250} 
+                  height={355}/>
+                  <div className="flex flex-col items-center gap-4">
+                    <h5>Mon profil vous intéresse ?</h5>
+                    <a href="/assets/CV_vaysse_emma.pdf" className="bg-accent text-white px-[20px] py-[10px] rounded-xl" download> Telecharger mon CV</a>
+                    <a href="mailto:&#101;&#109;&#109;&#97;&#46;&#118;&#97;&#121;&#115;&#115;&#101;&#46;&#98;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#102;&#114;" className="bg-accent text-white px-[20px] py-[10px] rounded-xl"> Me contacter</a>
+                  </div>
+              </div>
+              <div className="flex flex-col items-start gap-16">
+                <div className="flex items-start">
+                <Image
+                    src="/assets/arrow.svg"
+                    alt="arrow"
+                    width={88}
+                    height={100}
+                    className="transform scale-x-[-1] float "
+                  />
+                  <div>
+                    <h5>Biographie</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                <Image
+                    src="/assets/arrow.svg"
+                    alt="arrow"
+                    width={88}
+                    height={100}
+                    className="transform scale-[-1] float "
+                  />
+                  <div>
+                    <h5>Mes études</h5>
+                    <p>Après avoir testé plusieurs disciplines notamment 4 ans de formation d'assistante sociale, j'ai décidé de me reconvertir à 25 ans dans le développement web au sein de l'Ecole Supérieur du Digital à Bordeaux. Cetteécole me permet de développer ma créativité et de repousser mes limites chaque jour.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      
+    </main>
   );
 }
