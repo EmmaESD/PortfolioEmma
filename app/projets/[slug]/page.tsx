@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Techno from '@/app/components/Techno';
 import ProjectLinks from '@/app/components/ProjectLinks';
 import Tag from '@/app/components/Tag';
+import LatestProjects from '@/app/components/LatestProjects';
 
 // Génère les routes statiques au build
 export async function generateStaticParams() {
@@ -64,6 +65,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="flex w-full justify-center">
           <ProjectLinks project={project} />
       </div>
+      <LatestProjects limit={6} />
     </main>
   );
 }

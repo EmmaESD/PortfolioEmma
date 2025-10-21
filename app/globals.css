@@ -77,3 +77,32 @@
 
     }
 }
+
+/* Styles pour le carrousel des derniers projets */
+.latest-projects-swiper {
+  padding-bottom: 3rem;
+}
+
+.latest-projects-swiper .swiper-button-next,
+.latest-projects-swiper .swiper-button-prev {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.latest-projects-swiper .swiper-button-next:after,
+.latest-projects-swiper .swiper-button-prev:after {
+  font-size: 20px;
+}
+
+.latest-projects-swiper .swiper-pagination-bullet {
+  background-color: var(--color-dark);
+  opacity: 0.3;
+}
+
+.latest-projects-swiper .swiper-pagination-bullet-active {
+  background-color: var(--color-accent);
+  opacity: 1;
+}
