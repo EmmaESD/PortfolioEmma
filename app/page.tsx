@@ -49,7 +49,7 @@ export default async function Home() {
           </div>
         </section>
         </header>
-        <section>
+        <section  id="qui-suis-je">
           <div className="flex flex-col p-16 items-center gap-15">
             <h3>Qui suis-je ?</h3>
             <div className="grid grid-cols-3 gap-4">
@@ -58,7 +58,7 @@ export default async function Home() {
                   <div className="flex items-start">
                     <div>
                     <h5>Mes Passions</h5>
-                    <p>De la peinture, à l'écriture en passant pas le jardinage, j'aime créer, innover, coder et découvrir de nouvelles disciplines qui me donnent envie chaque jour de me surpasser.</p>
+                    <p>De la peinture, à l'écriture en passant par le jardinage, j’adore coder, créer et résoudre des problèmes techniques tout en explorant le design. J’aime voir un projet prendre vie et correspondre aux besoins réels des utilisateurs. La créativité, la logique et l’innovation sont au cœur de tout ce que je fais.</p>
                   </div>
                   <Image
                     src="/assets/arrow.svg"
@@ -72,8 +72,8 @@ export default async function Home() {
                 <div className="flex items-start">
                   <div>
                     <h5>Mes Compétences</h5>
-                    <p>Je connais les langages de base du web, du front au back. J'ai également des compétences dans le webdesign avec notamment le logiciel figma ou illustrator et photoshop pour d'autres créations. Mes expériences passées m'ont également permis de développer des compétences humaines tel que le travail d'équipe, l'analyse des besoins et la rédaction.</p>
-                  </div>
+                    <p>Je suis une développeuse fullstack polyvalente, à l’aise autant avec le design qu’avec la programmation. J’aime mener mes projets de A à Z, en combinant Next.js, React, Node.js et bien d’autres outils pour créer des expériences web fluides, esthétiques et fonctionnelles. Mon approche est toujours guidée par la rigueur, la créativité et l’écoresponsabilité.</p>                  
+                    </div>
                   <Image
                     src="/assets/arrow.svg"
                     alt="arrow"
@@ -92,7 +92,6 @@ export default async function Home() {
                   <div className="flex flex-col items-center gap-4">
                     <h5>Mon profil vous intéresse ?</h5>
                     <a href="/assets/CV_vaysse_emma.pdf" className="bg-accent text-white px-[20px] py-[10px] rounded-xl" download> Telecharger mon CV</a>
-                    <a href="mailto:&#101;&#109;&#109;&#97;&#46;&#118;&#97;&#121;&#115;&#115;&#101;&#46;&#98;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#102;&#114;" className="bg-accent text-white px-[20px] py-[10px] rounded-xl"> Me contacter</a>
                   </div>
               </div>
               <div className="flex flex-col items-start gap-16">
@@ -106,7 +105,7 @@ export default async function Home() {
                   />
                   <div>
                     <h5>Biographie</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Je suis une développeuse fullstack passionnée par la création de projets alliant design et technique. Curieuse et organisée, j’aime transformer une idée en expérience concrète, du concept à la mise en ligne. Toujours en quête d’apprentissage, je cherche aujourd’hui une alternance pour poursuivre mon parcours en développement web à l’ESD Bordeaux.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -119,12 +118,14 @@ export default async function Home() {
                   />
                   <div>
                     <h5>Mes études</h5>
-                    <p>Après avoir testé plusieurs disciplines notamment 4 ans de formation d'assistante sociale, j'ai décidé de me reconvertir à 25 ans dans le développement web au sein de l'Ecole Supérieur du Digital à Bordeaux. Cetteécole me permet de développer ma créativité et de repousser mes limites chaque jour.</p>
-                  </div>
+                    <p>Actuellement en B3 Développement Web à l’ESD Bordeaux, je me forme à toutes les facettes du développement, du front au back-end, tout en explorant l’UX/UI et les meilleures pratiques du web moderne. Mon parcours m’a permis de travailler sur des projets variés et concrets, où je mets en pratique mes compétences tout en expérimentant de nouvelles technologies.</p>
+                </div>
                 </div>
               </div>
             </div>
+            
           </div>
+          
         </section>
       <LatestProjects limit={4} />
     </main>

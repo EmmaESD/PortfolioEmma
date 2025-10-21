@@ -13,9 +13,9 @@ export default function LatestProjects({ limit = 4 }: LatestProjectsProps) {
     .slice(0, limit);
 
   return (
-    <section className="py-16 px-8">
+    <section className="py-16 px-16">
       <div className="flex items-center justify-between mb-8">
-        <h2>Mes derniers projets</h2>
+        <h3>Mes derniers projets</h3>
         <Link 
           href="/projets" 
           className="text-accent hover:text-secondary transition-colors font-medium"
