@@ -11,8 +11,8 @@ export default function Techno({ name, icon }: TechnoProps) {
       <Image 
         src={icon}
         alt={name}
-        width={32}
-        height={32}
+        width={80}
+        height={80}
         className="hover:scale-110 transition-transform cursor-pointer"
       />
       <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/techno:opacity-100 bg-dark text-white text-xs px-2 py-1 rounded whitespace-nowrap transition-opacity pointer-events-none">
