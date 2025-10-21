@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { projects } from './data/projects';
 import CardProject from '../components/CardProject';
+import LatestProjects from '../components/LatestProjects';
 
 export default function ProjectsPage() {
   return (
@@ -18,6 +19,7 @@ export default function ProjectsPage() {
           </Link>
         ))}
       </div>
+      <LatestProjects limit={6} />
     </main>
   );
 }
