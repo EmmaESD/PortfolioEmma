@@ -4,7 +4,7 @@ import CardProject from '../components/CardProject';
 
 export default function ProjectsPage() {
   return (
-    <main className=" typography">
+    <main className=" typography px-16">
       <h1 className='text-2xl'>Mes Projets</h1>
       <p>Découvrez mes projets persos et d'école !</p>
       

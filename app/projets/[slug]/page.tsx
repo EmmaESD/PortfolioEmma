@@ -32,7 +32,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <main className="typography flex flex-col gap-20">
+    <main className="typography flex flex-col gap-20 px-16">
       <div className='flex flex-col justify-center items-center gap-4'>
         <h1 className='text-xl'>{project.title}</h1>
         <p>{project.date.toLocaleDateString()}</p>
