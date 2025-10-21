@@ -1,8 +1,12 @@
 import { TECHNOLOGIES, Technology } from "./technologies";
+
+export type ProjectCategory = "pro" | "perso" | "école";
+
 export interface Project {
   slug: string;
   title: string;
   date: Date;
+  category: ProjectCategory;
   longDescription: string;
   technologies: Technology[];
   demoUrl?: string;
@@ -22,5 +26,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/...",
     figmaUrl: "https://figma.com/...",
     image: "/assets/projects-img/test.png",
+    category: "perso",
   },
 ];

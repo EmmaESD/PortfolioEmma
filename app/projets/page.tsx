@@ -1,40 +1,20 @@
 import Link from 'next/link';
 import { projects } from './data/projects';
-import Image from 'next/image';
-import Techno from '../components/Techno';
+import CardProject from '../components/CardProject';
 
 export default function ProjectsPage() {
   return (
-    <main>
-      <h1>Mes Projets</h1>
+    <main className="p-16 typography">
+      <h1 className='text-2xl'>Mes Projets</h1>
+      <p>Découvrez mes projets persos et d'école !</p>
       
-      <div className="grid grid-cols-2 gap-8 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
         {projects.map((project) => (
           <Link 
             key={project.slug} 
             href={`/projets/${project.slug}`}
-            className="group"
           >
-            <div className="relative h-96 overflow-hidden rounded-xl">
-              <Image 
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <h3 className="mt-4">{project.title}</h3>
-            <p>{project.date.toLocaleDateString()}</p>
-            
-            <div className="flex items-center gap-2 mt-2">
-              {project.technologies.map((tech) => (
-                <Techno 
-                  key={tech.name}
-                  name={tech.name}
-                  icon={tech.icon}
-                />
-              ))}
-            </div>
+            <CardProject project={project} />
           </Link>
         ))}
       </div>
