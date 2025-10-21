@@ -17,10 +17,10 @@ export const projects: Project[] = [
     title: "Portfolio 3D Interactif",
     date: new Date("2024-01-01"),
     longDescription: "Lorem ipsum dolor sit amet...",
-    technologies: [TECHNOLOGIES.react],
+    technologies: [TECHNOLOGIES.react, TECHNOLOGIES.tailwind],
     demoUrl: "https://example.com",
     githubUrl: "https://github.com/...",
     figmaUrl: "https://figma.com/...",
-    image: "/assets/profil.png",
+    image: "/assets/projects-img/test.png",
   },
 ];

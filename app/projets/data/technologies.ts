@@ -11,5 +11,4 @@ export const TECHNOLOGIES: Record<string, Technology> = {
   threejs: { id: "threejs", name: "Three.js", icon: "/assets/technos/threejs.svg" },
   typescript: { id: "typescript", name: "TypeScript", icon: "/assets/technos/typescript.svg" },
   node: { id: "node", name: "Node.js", icon: "/assets/technos/nodejs.svg" },
-  // ... toutes vos technos
 };

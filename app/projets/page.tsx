@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { projects } from './data/projects';
 import Image from 'next/image';
+import Techno from '../components/Techno';
 
 export default function ProjectsPage() {
   return (
@@ -27,15 +28,11 @@ export default function ProjectsPage() {
             
             <div className="flex items-center gap-2 mt-2">
               {project.technologies.map((tech) => (
-                <div key={tech.name} className="flex items-center gap-1">
-                  <Image 
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={24}
-                    height={24}
-                  />
-                  <span className="text-sm">{tech.name}</span>
-                </div>
+                <Techno 
+                  key={tech.name}
+                  name={tech.name}
+                  icon={tech.icon}
+                />
               ))}
             </div>
           </Link>
