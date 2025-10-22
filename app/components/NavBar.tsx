@@ -54,6 +54,7 @@ export default function NavBar() {
           <Link 
             href="mailto:&#101;&#109;&#109;&#97;&#46;&#118;&#97;&#121;&#115;&#115;&#101;&#46;&#98;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#102;&#114;" 
             className="text-white px-4 lg:px-[20px] py-2 lg:py-[10px] rounded-xl transition-colors text-sm lg:text-base"
+            target="_blank"
             style={{ 
               backgroundColor: 'var(--color-accent)'
             }}

@@ -21,7 +21,7 @@ export const projects: Project[] = [
     slug: "residence-arsenal-royal",
     title: "Résidence Arsenal Royal",
     date: new Date("2025-08-29"),
-    longDescription: "Durant mon stage de 4 mois au sein de la Résidence de l&apos;arsenal royal, j&apos;ai eu l&apos;opportunité de refaire entièrement le site web de l&apos;entreprise. De la conception de la maquette sur figma à la mise en ligne, j&apos;ai pu expérimenter l&apos;organisation d&apos;un projet mené de A à Z. J&apos;ai développé le site sous wordpress en utilisant le thème builder Elementor. Ce fut une expérience enrichissante qui m&apos;a permis de mieux comprendre les besoins des clients et de perfectionner mes compétences en développement web.",
+    longDescription: "Durant mon stage de 4 mois au sein de la Résidence de l'arsenal royal, j'ai eu l'opportunité de refaire entièrement le site web de l'entreprise. De la conception de la maquette sur figma à la mise en ligne, j'ai pu expérimenter l'organisation d'un projet mené de A à Z. J'ai développé le site sous wordpress en utilisant le thème builder Elementor. Ce fut une expérience enrichissante qui m'a permis de mieux comprendre les besoins des clients et de perfectionner mes compétences en développement web.",
     technologies: [TECHNOLOGIES.wordpress, TECHNOLOGIES.figma, TECHNOLOGIES.illustrator, TECHNOLOGIES.photoshop],
     demoUrl: "https://www.residencearsenalroyal.fr/",
     figmaUrl: "https://www.figma.com/proto/Meu0BAo6622jXvXvgPrW78/Arsenal-Royal?page-id=165%3A3554&node-id=308-5910&p=f&viewport=497%2C291%2C0.03&t=KOOv4uK6a0G9gc2c-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=308%3A5910",
