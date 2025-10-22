@@ -7,15 +7,15 @@ interface TagProps {
 export default function Tag({ category }: TagProps) {
     const styles = {
     école: {
-      bg: "bg-blue-500",
+      bg: "bg-tag-ecole",
       text: "École",
     },
     pro: {
-      bg: "bg-green-500",
+      bg: "bg-tag-pro",
       text: "Pro",
     },
     perso: {
-      bg: "bg-purple-500",
+      bg: "bg-tag-perso",
       text: "Perso",
     },
   };
