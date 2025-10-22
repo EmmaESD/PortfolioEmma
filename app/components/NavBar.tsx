@@ -9,7 +9,7 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="w-full h-fit py-5 px-4 md:px-10 flex items-center justify-between relative z-50 bg-primary mb-10">
+      <nav className="w-full h-fit py-5 px-4 md:px-10 flex items-center justify-between relative z-4 bg-primary mb-10">
         {/* Logo */}
         <Link href="/" className="relative z-50">
           <Image 

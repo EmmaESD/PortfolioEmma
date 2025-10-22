@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable} antialiased flex flex-col m-0 bg-primary`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col bg-primary`}
       >
         <NavBar/>
         {children}

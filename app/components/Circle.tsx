@@ -40,7 +40,7 @@ export default function ThreeScene() {
     container.appendChild(renderer.domElement);
 
     // Sphère
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    const geometry = new THREE.SphereGeometry(2, 32, 32);
     const material = new THREE.MeshBasicMaterial({ 
       color: 0xF48B7C, 
       transparent: true, 
@@ -107,7 +107,7 @@ export default function ThreeScene() {
         left: 0,
         width: "100%",
         height: "100vh",
-        zIndex: 0,
+        zIndex: 5,
         pointerEvents: "none",
         filter: "blur(50px)",
       }}
