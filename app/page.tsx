@@ -6,7 +6,7 @@ import LatestProjects from "./components/LatestProjects";
 
 export const metadata: Metadata = {
   title: "Emma Vaysse - Portfolio",
-  description: "Portfolio d&apos;Emma Vaysse - Développeuse Web",
+  description: "Portfolio d'Emma Vaysse - Développeuse Web",
 };
 
 const items = [
