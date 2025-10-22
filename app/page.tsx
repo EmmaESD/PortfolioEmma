@@ -1,103 +1,159 @@
+import { Metadata } from "next";
 import Image from "next/image";
+import ThreeScene from "./components/Circle";
+import InfiniteScroll from "./components/Swiper";
+import LatestProjects from "./components/LatestProjects";
+import Footer from "./components/Footer";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Emma Vaysse - Portfolio",
+  description: "Portfolio d'Emma Vaysse - Développeuse Web",
+};
+
+const items = [
+  { content: <p className="text-white">React</p> },
+  { content: <p className="text-white">Next.js</p> },
+  { content: <p className="text-white">Tailwind</p> },
+  { content: <p className="text-white">TypeScript</p> },
+  { content: <p className="text-white">Node.js</p> },
+  { content: <p className="text-white">Express</p> },
+  { content: <p className="text-white">Docker</p> },
+  { content: <p className="text-white">PostgreSQL</p> },
+  { content: <p className="text-white">Git</p> },
+];
+
+export default async function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="w-full m-0 typography">
+      {/* HEADER - Hero Section */}
+      <header className="w-full flex flex-col justify-start gap-60 lg:gap-80 items-center min-h-screen">
+        <ThreeScene />
+        
+        {/* Titre principal */}
+        <div className="flex flex-col items-center md:items-start justify-center mt-20 md:mt-44 lg:mt-20 gap-0.5 z-10 px-4">
+          <h1 className="text-center md:text-left w-full">PORTFOLIO</h1>
+          <div className="flex flex-col items-center md:items-start justify-center">
+            <h2 className="text-center md:text-left">Emma VAYSSE</h2>
+            <h2 className="text-center md:text-left">DEVELOPPEUSE WEB</h2>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        
+        {/* Bande défilante */}
+        <section className="w-full">
+          <div className="h-[50px] md:h-[65px] text-white bg-black pt-3 md:pt-5">
+            <InfiniteScroll
+              items={items}
+              isTilted={true}
+              autoplay={true}
+              autoplaySpeed={0.6}
+              autoplayDirection="left"
+              pauseOnHover={true}
+            />
+          </div>
+        </section>
+      </header>
+
+      {/* SECTION QUI SUIS-JE */}
+      <section id="qui-suis-je" className="scroll-mt-20">
+        <div className="flex flex-col p-4 md:px-8 lg:px-16 items-center gap-8 lg:gap-15">
+          <h3 className="text-center">Qui suis-je ?</h3>
+          
+          {/* Grid responsive */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 w-full">
+            
+            {/* COLONNE 1 - Passions & Compétences */}
+            <div className="flex flex-col justify-center items-start gap-8 lg:gap-16 order-2 lg:order-1">
+              {/* Passions */}
+              <div className="flex flex-col md:flex-row items-start gap-4">
+                <div className="flex-1">
+                  <h5>Mes Passions</h5>
+                  <p>De la peinture, à l'écriture en passant par le jardinage, j'adore coder, créer et résoudre des problèmes techniques tout en explorant le design. J'aime voir un projet prendre vie et correspondre aux besoins réels des utilisateurs. La créativité, la logique et l'innovation sont au cœur de tout ce que je fais.</p>
+                </div>
+                <Image
+                  src="/assets/arrow.svg"
+                  alt="arrow"
+                  width={88}
+                  height={100}
+                  className="float hidden md:block w-16 lg:w-[88px]"
+                />
+              </div>
+
+              {/* Compétences */}
+              <div className="flex flex-col md:flex-row items-start gap-4">
+                <div className="flex-1">
+                  <h5>Mes Compétences</h5>
+                  <p>Je suis une développeuse fullstack polyvalente, à l'aise autant avec le design qu'avec la programmation. J'aime mener mes projets de A à Z, en combinant Next.js, React, Node.js et bien d'autres outils pour créer des expériences web fluides, esthétiques et fonctionnelles. Mon approche est toujours guidée par la rigueur, la créativité et l'écoresponsabilité.</p>
+                </div>
+                <Image
+                  src="/assets/arrow.svg"
+                  alt="arrow"
+                  width={88}
+                  height={100}
+                  className="transform scale-y-[-1] float hidden md:block w-16 lg:w-[88px]"
+                />
+              </div>
+            </div>
+
+            {/* COLONNE 2 - Photo & CTA (au centre sur desktop, en premier sur mobile) */}
+            <div className="flex flex-col justify-start items-center gap-6 lg:gap-10 order-1 lg:order-2">
+              <Image 
+                src="/assets/whoami.png" 
+                alt="photo de profil" 
+                width={250} 
+                height={355}
+                className="w-40 md:w-52 lg:w-[250px] h-auto"
+              />
+              <div className="flex flex-col items-center gap-4">
+                <h5 className="text-center">Mon profil vous intéresse ?</h5>
+                <a 
+                  href="/assets/CV_vaysse_emma.pdf" 
+                  className="bg-accent text-white px-5 py-2 lg:px-[20px] lg:py-[10px] rounded-xl hover:bg-secondary transition-colors text-sm lg:text-base" 
+                  download
+                >
+                  Télécharger mon CV
+                </a>
+              </div>
+            </div>
+
+            {/* COLONNE 3 - Biographie & Études */}
+            <div className="flex flex-col items-start gap-8 lg:gap-16 order-3">
+              {/* Biographie */}
+              <div className="flex flex-col md:flex-row items-start gap-4">
+                <Image
+                  src="/assets/arrow.svg"
+                  alt="arrow"
+                  width={88}
+                  height={100}
+                  className="transform scale-x-[-1] float hidden md:block w-16 lg:w-[88px]"
+                />
+                <div className="flex-1">
+                  <h5>Biographie</h5>
+                  <p>Je suis une développeuse fullstack passionnée par la création de projets alliant design et technique. Curieuse et organisée, j'aime transformer une idée en expérience concrète, du concept à la mise en ligne. Toujours en quête d'apprentissage, je cherche aujourd'hui une alternance pour poursuivre mon parcours en développement web à l'ESD Bordeaux.</p>
+                </div>
+              </div>
+
+              {/* Études */}
+              <div className="flex flex-col md:flex-row items-start gap-4">
+                <Image
+                  src="/assets/arrow.svg"
+                  alt="arrow"
+                  width={88}
+                  height={100}
+                  className="transform scale-[-1] float hidden md:block w-16 lg:w-[88px]"
+                />
+                <div className="flex-1">
+                  <h5>Mes études</h5>
+                  <p>Actuellement en B3 Développement Web à l'ESD Bordeaux, je me forme à toutes les facettes du développement, du front au back-end, tout en explorant l'UX/UI et les meilleures pratiques du web moderne. Mon parcours m'a permis de travailler sur des projets variés et concrets, où je mets en pratique mes compétences tout en expérimentant de nouvelles technologies.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <LatestProjects limit={4} />
+        </div>
+        
+      </section>
+      
+      
+    </main>
   );
 }
