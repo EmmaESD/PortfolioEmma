@@ -34,11 +34,11 @@ export default async function Home() {
   return (
     <main className="w-full m-0 typography">
       {/* HEADER - Hero Section */}
-      <header className="w-full flex flex-col justify-start gap-60 lg:gap-80 items-center min-h-screen">
+      <header className="w-full flex flex-col justify-start gap-80 lg:gap-80 items-center lg:min-h-screen">
         <ThreeScene />
         
         {/* Titre principal */}
-        <div className="flex flex-col items-center md:items-start justify-center mt-20 md:mt-44 lg:mt-20 gap-0.5 z-10 px-4">
+        <div className="flex flex-col items-center md:items-start justify-center mt-30 md:mt-44 lg:mt-20 gap-0.5 z-10 px-4">
           <h1 className="text-center md:text-left w-full">PORTFOLIO</h1>
           <div className="flex flex-col items-center md:items-start justify-center">
             <h2 className="text-center md:text-left">Emma VAYSSE</h2>
@@ -47,7 +47,7 @@ export default async function Home() {
         </div>
         
         {/* Bande défilante */}
-        <section className="w-full">
+        <section className="w-full z-10">
           <div className="h-[50px] md:h-[65px] text-white bg-black pt-3 md:pt-5 z-10">
             <InfiniteScroll
               items={items}
@@ -62,7 +62,7 @@ export default async function Home() {
       </header>
 
       {/* SECTION QUI SUIS-JE */}
-      <section id="qui-suis-je" className="scroll-mt-20">
+      <section id="qui-suis-je" className="mt-20">
         <div className="flex flex-col p-4 md:px-8 lg:px-16 items-center gap-8 lg:gap-15">
           <h3 className="text-center">Qui suis-je ?</h3>
           
