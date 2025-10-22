@@ -210,9 +210,9 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
         `}
       </style>
 
-      <div className="infinite-scroll-wrapper" ref={wrapperRef}>
+      <div className="infinite-scroll-wrapper z-11" ref={wrapperRef}>
         <div
-          className="infinite-scroll-container"
+          className="infinite-scroll-container z-11"
           ref={containerRef}
           style={{
             transform: getTiltTransform(),
