@@ -8,7 +8,7 @@ export default function Footer() {
                 {/* Réseaux sociaux - en haut */}
                 <div className="flex gap-4 justify-center md:justify-start order-1">
                     <Link 
-                        href="https://github.com/votreusername" 
+                        href="https://github.com/EmmaESD" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="cursor-pointer transition-transform duration-300 hover:scale-110"
@@ -27,7 +27,7 @@ export default function Footer() {
                     </Link>
                     
                     <Link 
-                        href="https://linkedin.com/in/votreprofil" 
+                        href="https://www.linkedin.com/in/emma-vaysse/" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="cursor-pointer transition-transform duration-300 hover:scale-110"

@@ -8,6 +8,7 @@ export interface Technology {
 
 export const TECHNOLOGIES: Record<string, Technology> = {
   react: { id: "react", name: "React", icon: "/assets/technos/react.svg" },
+  reactnative: { id: "reactnative", name: "React Native", icon: "/assets/technos/react.svg" },
   nextjs: { id: "nextjs", name: "Next.js", icon: "/assets/technos/nextjs.svg" },
   tailwind: { id: "tailwind", name: "Tailwind CSS", icon: "/assets/technos/tailwind.svg" },
   wordpress: { id: "wordpress", name: "WordPress", icon: "/assets/technos/wordpress.svg" },
@@ -30,4 +31,5 @@ export const TECHNOLOGIES: Record<string, Technology> = {
   prisma: { id: "prisma", name: "Prisma", icon: "/assets/technos/prisma.svg" },
   mapbox: { id: "mapbox", name: "Mapbox", icon: "/assets/technos/mapbox.svg" },
   tiled: { id: "tiled", name: "TiledMap", icon: "/assets/technos/tiled.svg" },
+  expo: { id: "expo", name: "Expo", icon: "/assets/technos/expo.svg" },
 };

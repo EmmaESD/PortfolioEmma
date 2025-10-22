@@ -13,7 +13,7 @@ export default function LatestProjects({ limit = 4 }: LatestProjectsProps) {
     .slice(0, limit);
 
   return (
-    <section className="py-16 my-20">
+    <section className="py-16 my-20 w-full">
       <div className="flex items-center justify-between mb-8">
         <h3>Mes derniers projets</h3>
         <Link 
