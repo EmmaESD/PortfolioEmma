@@ -32,7 +32,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <main className="typography flex flex-col gap-20 px-16">
+    <main className="typography flex flex-col gap-20 px-30">
       <div className='flex flex-col justify-center items-center gap-4'>
         <h1 className='text-xl'>{project.title}</h1>
         <p>{project.date.toLocaleDateString()}</p>
@@ -47,10 +47,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           src={project.image}
           alt={project.title}
           width={600}
-          height={300}
-          className="object-cover rounded-2xl"
+          height={500}
+          className="object-fit rounded-2xl"
         />
-        <div>
+        <div className='flex flex-col gap-4'>
           <h2 className='text-lg'>Technos utilisées</h2>
           <div className='grid grid-cols-4 gap-4'>
             {project.technologies.map((tech) => (

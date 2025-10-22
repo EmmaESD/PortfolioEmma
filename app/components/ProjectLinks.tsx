@@ -12,9 +12,9 @@ export default function ProjectLinks({ project }: ProjectLinksProps) {
   }
 
   return (
-    <section className="flex w-full">
+    <section className="flex w-full justify-center">
       
-      <div className="flex justify-between w-full gap-20">
+      <div className="flex justify-between items-center w-full gap-20 max-w-150">
         {/* Bouton 1 : Lien démo */}
         {project.demoUrl && (
           <ButtonProject 

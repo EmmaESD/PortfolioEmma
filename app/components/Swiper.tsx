@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 
@@ -36,8 +36,39 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [responsiveItemWidth, setResponsiveItemWidth] = useState(itemMinWidth);
+  const [responsiveSpeed, setResponsiveSpeed] = useState(autoplaySpeed);
 
-  const getTiltTransform = (): string => "none"; 
+  const getTiltTransform = (): string => "none";
+
+  // Ajuster les valeurs selon la taille de l'écran
+  useEffect(() => {
+    const updateResponsiveValues = () => {
+      const screenWidth = window.innerWidth;
+
+      // Ajuster la largeur des items
+      if (screenWidth < 640) {
+        // Mobile
+        setResponsiveItemWidth(itemMinWidth * 0.6); // 60% de la taille
+        setResponsiveSpeed(autoplaySpeed * 0.7); // Vitesse réduite
+      } else if (screenWidth < 1024) {
+        // Tablette
+        setResponsiveItemWidth(itemMinWidth * 0.8); // 80% de la taille
+        setResponsiveSpeed(autoplaySpeed * 0.85); // Vitesse moyenne
+      } else {
+        // Desktop
+        setResponsiveItemWidth(itemMinWidth);
+        setResponsiveSpeed(autoplaySpeed);
+      }
+    };
+
+    updateResponsiveValues();
+    window.addEventListener("resize", updateResponsiveValues);
+
+    return () => {
+      window.removeEventListener("resize", updateResponsiveValues);
+    };
+  }, [itemMinWidth, autoplaySpeed]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -91,7 +122,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     let rafId: number;
     if (autoplay) {
       const directionFactor = autoplayDirection === "right" ? 1 : -1;
-      const speedPerFrame = autoplaySpeed * directionFactor;
+      const speedPerFrame = responsiveSpeed * directionFactor;
 
       const tick = () => {
         divItems.forEach((child) => {
@@ -137,7 +168,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   }, [
     items.length,
     autoplay,
-    autoplaySpeed,
+    responsiveSpeed,
     autoplayDirection,
     pauseOnHover,
     negativeMargin,
@@ -159,9 +190,23 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
           }
 
           .infinite-scroll-item {
-            min-width: ${itemMinWidth}px;
+            min-width: ${responsiveItemWidth}px;
             margin-left: ${negativeMargin};
             flex-shrink: 0;
+            font-size: 0.875rem; /* Base pour mobile */
+          }
+
+          /* Responsive font sizes */
+          @media (min-width: 640px) {
+            .infinite-scroll-item {
+              font-size: 1rem;
+            }
+          }
+
+          @media (min-width: 1024px) {
+            .infinite-scroll-item {
+              font-size: 1.125rem;
+            }
           }
         `}
       </style>

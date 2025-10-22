@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { projects } from './data/projects';
 import CardProject from '../components/CardProject';
-import LatestProjects from '../components/LatestProjects';
 
 export default function ProjectsPage() {
   return (
-    <main className=" typography px-16">
+    <main className=" typography px-16 h-screen">
       <h1 className='text-2xl'>Mes Projets</h1>
       <p>Découvrez mes projets persos et d'école !</p>
       

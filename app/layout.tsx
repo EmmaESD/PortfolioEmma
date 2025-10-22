@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Jaro, JetBrains_Mono } from 'next/font/google'
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 // Configuration Jaro
 const jaro = Jaro({
@@ -43,10 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable}antialiased flex flex-col gap-10 bg-primary`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable} antialiased flex flex-col m-0 bg-primary`}
       >
         <NavBar/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
