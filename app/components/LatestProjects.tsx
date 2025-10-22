@@ -18,7 +18,7 @@ export default function LatestProjects({ limit = 4 }: LatestProjectsProps) {
         <h3>Mes derniers projets</h3>
         <Link 
           href="/projets" 
-          className="text-accent hover:text-secondary transition-colors font-medium"
+          className="hidden md:inline-block text-accent hover:text-secondary transition-colors font-medium"
         >
           Voir tous les projets →
         </Link>

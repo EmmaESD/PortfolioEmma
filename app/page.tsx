@@ -148,11 +148,11 @@ export default async function Home() {
               </div>
             </div>
           </div>
+          <LatestProjects limit={4} />
         </div>
+        
       </section>
-
-      {/* DERNIERS PROJETS */}
-      <LatestProjects limit={4} />
+      
       
     </main>
   );

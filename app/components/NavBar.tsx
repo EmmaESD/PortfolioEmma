@@ -98,7 +98,7 @@ export default function NavBar() {
         <div className="flex flex-col items-center justify-center h-full gap-12 px-8">
           <Link 
             href="/#qui-suis-je" 
-            className="text-black text-2xl font-medium hover:opacity-70 transition-opacity"
+            className="text-black text-xl font-medium hover:opacity-70 transition-opacity"
             onClick={() => setIsMenuOpen(false)}
             style={{ color: 'var(--color-dark)' }}
           >
@@ -107,7 +107,7 @@ export default function NavBar() {
 
           <Link 
             href="/projets" 
-            className="text-black text-2xl font-medium hover:opacity-70 transition-opacity"
+            className="text-black text-xl font-medium hover:opacity-70 transition-opacity"
             onClick={() => setIsMenuOpen(false)}
             style={{ color: 'var(--color-dark)' }}
           >
