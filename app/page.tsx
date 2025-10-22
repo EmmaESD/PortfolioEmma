@@ -66,7 +66,7 @@ export default async function Home() {
               <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="flex-1">
                   <h5>Mes Passions</h5>
-                  <p>De la peinture, à l&apos;écriture en passant par le jardinage, j&apos;adore coder, créer et résoudre des problèmes techniques tout en explorant le design. J&apos;aime voir un projet prendre vie et correspondre aux besoins réels des utilisateurs. La créativité, la logique et l&apos;innovation sont au cœur de tout ce que je fais.</p>
+                  <p>Entre peinture, écriture et jardinage, j&apos;aime avant tout créer. Le code est pour moi une autre forme d&apos;expression : une manière de résoudre des problèmes tout en donnant vie à des idées. J&apos;aime concevoir des projets utiles, esthétiques et centrés sur l&apos;humain, où la créativité et la logique se rejoignent naturellement.</p>                
                 </div>
                 <Image
                   src="/assets/arrow.svg"
@@ -81,7 +81,7 @@ export default async function Home() {
               <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="flex-1">
                   <h5>Mes Compétences</h5>
-                  <p>Je suis une développeuse fullstack polyvalente, à l&apos;aise autant avec le design qu&apos;avec la programmation. J&apos;aime mener mes projets de A à Z, en combinant Next.js, React, Node.js et bien d&apos;autres outils pour créer des expériences web fluides, esthétiques et fonctionnelles. Mon approche est toujours guidée par la rigueur, la créativité et l&apos;écoresponsabilité.</p>
+                  <p>Polyvalente et autonome, je maîtrise aussi bien le front-end que le back-end, avec des technologies comme React, Next.js ou Node.js. J&apos;accorde une grande importance à la qualité du code, à l&apos;accessibilité et à la cohérence visuelle. Mon objectif : créer des expériences web performantes, durables et agréables à utiliser, où la technique sert réellement le design et les besoins des utilisateurs.</p>                
                 </div>
                 <Image
                   src="/assets/arrow.svg"
@@ -127,7 +127,7 @@ export default async function Home() {
                 />
                 <div className="flex-1">
                   <h5>Biographie</h5>
-                  <p>Je suis une développeuse fullstack passionnée par la création de projets alliant design et technique. Curieuse et organisée, j&apos;aime transformer une idée en expérience concrète, du concept à la mise en ligne. Toujours en quête d&apos;apprentissage, je cherche aujourd&apos;hui une alternance pour poursuivre mon parcours en développement web à l&apos;ESD Bordeaux.</p>
+                  <p>Développeuse fullstack passionnée, j&apos;aime concevoir des projets qui allient esthétique, utilité et performance. Curieuse et rigoureuse, je prends plaisir à transformer une idée en produit concret, de la maquette à la mise en ligne. Toujours en quête de nouveaux défis, je recherche aujourd&apos;hui une alternance pour poursuivre mon parcours en développement web à l&apos;ESD Bordeaux.</p>                
                 </div>
               </div>
 
@@ -142,7 +142,7 @@ export default async function Home() {
                 />
                 <div className="flex-1">
                   <h5>Mes études</h5>
-                  <p>Actuellement en B3 Développement Web à l&apos;ESD Bordeaux, je me forme à toutes les facettes du développement, du front au back-end, tout en explorant l&apos;UX/UI et les meilleures pratiques du web moderne. Mon parcours m&apos;a permis de travailler sur des projets variés et concrets, où je mets en pratique mes compétences tout en expérimentant de nouvelles technologies.</p>
+                  <p>Avant de me lancer dans le développement web, j&apos;ai étudié pendant quatre ans pour devenir assistante sociale. Cette expérience m&apos;a appris l&apos;écoute, l&apos;analyse des besoins et la collaboration — des qualités que je mets aujourd&apos;hui au service de la création numérique. À 25 ans, j&apos;ai choisi de me reconvertir vers un domaine qui me passionne : le développement web.</p>                
                 </div>
               </div>
             </div>
