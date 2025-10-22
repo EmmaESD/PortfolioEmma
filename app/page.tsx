@@ -15,10 +15,19 @@ const items = [
   { content: <p className="text-white">Tailwind</p> },
   { content: <p className="text-white">TypeScript</p> },
   { content: <p className="text-white">Node.js</p> },
-  { content: <p className="text-white">Express</p> },
   { content: <p className="text-white">Docker</p> },
   { content: <p className="text-white">PostgreSQL</p> },
   { content: <p className="text-white">Git</p> },
+  { content: <p className="text-white">Wordpress</p> },
+  { content: <p className="text-white">React Native</p> },
+  { content: <p className="text-white">PHP</p> },
+  { content: <p className="text-white">NestJS</p> },
+  { content: <p className="text-white">Prismic</p> },
+  { content: <p className="text-white">Figma</p> },
+  { content: <p className="text-white">Illustrator</p> },
+  { content: <p className="text-white">Photoshop</p> },
+  { content: <p className="text-white">Firebase</p> },
+  { content: <p className="text-white">Prisma</p> },
 ];
 
 export default async function Home() {
@@ -39,7 +48,7 @@ export default async function Home() {
         
         {/* Bande défilante */}
         <section className="w-full">
-          <div className="h-[50px] md:h-[65px] text-white bg-black pt-3 md:pt-5">
+          <div className="h-[50px] md:h-[65px] text-white bg-black pt-3 md:pt-5 z-10">
             <InfiniteScroll
               items={items}
               isTilted={true}
