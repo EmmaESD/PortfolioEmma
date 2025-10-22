@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { projects } from '../data/projects';
-import Image from 'next/image';
 import Techno from '@/app/components/Techno';
 import ProjectLinks from '@/app/components/ProjectLinks';
 import Tag from '@/app/components/Tag';

@@ -28,7 +28,6 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   negativeMargin = "-0.5em",
   items = [],
   itemMinWidth = 150,
-  isTilted = false,
   autoplay = false,
   autoplaySpeed = 0.5,
   autoplayDirection = "left",
