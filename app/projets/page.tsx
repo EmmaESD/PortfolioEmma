@@ -6,7 +6,7 @@ export default function ProjectsPage() {
   return (
     <main className=" typography px-10 md:px-16 lg:px-20 mb-10 min-h-screen">
       <h1 className='text-2xl'>Mes Projets</h1>
-      <p>Découvrez mes projets persos et d'école !</p>
+      <p>Découvrez mes projets persos et d&apos;école !</p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
         {projects.map((project) => (

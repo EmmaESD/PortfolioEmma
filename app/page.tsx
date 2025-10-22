@@ -3,11 +3,10 @@ import Image from "next/image";
 import ThreeScene from "./components/Circle";
 import InfiniteScroll from "./components/Swiper";
 import LatestProjects from "./components/LatestProjects";
-import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Emma Vaysse - Portfolio",
-  description: "Portfolio d'Emma Vaysse - Développeuse Web",
+  description: "Portfolio d&apos;Emma Vaysse - Développeuse Web",
 };
 
 const items = [
@@ -67,7 +66,7 @@ export default async function Home() {
               <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="flex-1">
                   <h5>Mes Passions</h5>
-                  <p>De la peinture, à l'écriture en passant par le jardinage, j'adore coder, créer et résoudre des problèmes techniques tout en explorant le design. J'aime voir un projet prendre vie et correspondre aux besoins réels des utilisateurs. La créativité, la logique et l'innovation sont au cœur de tout ce que je fais.</p>
+                  <p>De la peinture, à l&apos;écriture en passant par le jardinage, j&apos;adore coder, créer et résoudre des problèmes techniques tout en explorant le design. J&apos;aime voir un projet prendre vie et correspondre aux besoins réels des utilisateurs. La créativité, la logique et l&apos;innovation sont au cœur de tout ce que je fais.</p>
                 </div>
                 <Image
                   src="/assets/arrow.svg"
@@ -82,7 +81,7 @@ export default async function Home() {
               <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="flex-1">
                   <h5>Mes Compétences</h5>
-                  <p>Je suis une développeuse fullstack polyvalente, à l'aise autant avec le design qu'avec la programmation. J'aime mener mes projets de A à Z, en combinant Next.js, React, Node.js et bien d'autres outils pour créer des expériences web fluides, esthétiques et fonctionnelles. Mon approche est toujours guidée par la rigueur, la créativité et l'écoresponsabilité.</p>
+                  <p>Je suis une développeuse fullstack polyvalente, à l&apos;aise autant avec le design qu&apos;avec la programmation. J&apos;aime mener mes projets de A à Z, en combinant Next.js, React, Node.js et bien d&apos;autres outils pour créer des expériences web fluides, esthétiques et fonctionnelles. Mon approche est toujours guidée par la rigueur, la créativité et l&apos;écoresponsabilité.</p>
                 </div>
                 <Image
                   src="/assets/arrow.svg"
@@ -128,7 +127,7 @@ export default async function Home() {
                 />
                 <div className="flex-1">
                   <h5>Biographie</h5>
-                  <p>Je suis une développeuse fullstack passionnée par la création de projets alliant design et technique. Curieuse et organisée, j'aime transformer une idée en expérience concrète, du concept à la mise en ligne. Toujours en quête d'apprentissage, je cherche aujourd'hui une alternance pour poursuivre mon parcours en développement web à l'ESD Bordeaux.</p>
+                  <p>Je suis une développeuse fullstack passionnée par la création de projets alliant design et technique. Curieuse et organisée, j&apos;aime transformer une idée en expérience concrète, du concept à la mise en ligne. Toujours en quête d&apos;apprentissage, je cherche aujourd&apos;hui une alternance pour poursuivre mon parcours en développement web à l&apos;ESD Bordeaux.</p>
                 </div>
               </div>
 
@@ -143,7 +142,7 @@ export default async function Home() {
                 />
                 <div className="flex-1">
                   <h5>Mes études</h5>
-                  <p>Actuellement en B3 Développement Web à l'ESD Bordeaux, je me forme à toutes les facettes du développement, du front au back-end, tout en explorant l'UX/UI et les meilleures pratiques du web moderne. Mon parcours m'a permis de travailler sur des projets variés et concrets, où je mets en pratique mes compétences tout en expérimentant de nouvelles technologies.</p>
+                  <p>Actuellement en B3 Développement Web à l&apos;ESD Bordeaux, je me forme à toutes les facettes du développement, du front au back-end, tout en explorant l&apos;UX/UI et les meilleures pratiques du web moderne. Mon parcours m&apos;a permis de travailler sur des projets variés et concrets, où je mets en pratique mes compétences tout en expérimentant de nouvelles technologies.</p>
                 </div>
               </div>
             </div>

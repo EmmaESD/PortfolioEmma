@@ -1,5 +1,3 @@
-import css from "styled-jsx/css";
-
 export interface Technology {
   id: string;
   name: string;
