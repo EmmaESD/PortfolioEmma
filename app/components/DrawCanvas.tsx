@@ -12,14 +12,13 @@ interface CloudinaryImage {
   height: number
 }
 
-export default function DrawingPage() {
+export default function DrawCanvas() {
   const canvasRef = useRef<ReactSketchCanvasRef>(null)
   const [uploading, setUploading] = useState(false)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const [gallery, setGallery] = useState<CloudinaryImage[]>([])
   const [loadingGallery, setLoadingGallery] = useState(true)
 
-  // Charger la galerie au montage du composant
   useEffect(() => {
     loadGallery()
   }, [])
@@ -68,8 +67,6 @@ export default function DrawingPage() {
       if (data.success) {
         setUploadedUrl(data.url)
         alert('Dessin sauvegardé avec succès ! ✅')
-        
-        // Recharger la galerie après l'upload
         await loadGallery()
       } else {
         alert('Erreur lors de la sauvegarde')
@@ -83,9 +80,7 @@ export default function DrawingPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center gap-6 p-8 bg-gray-50">
-      <h1 className="text-4xl font-bold mt-8">Zone de dessin</h1>
-      
+    <>
       <div className="border-4 border-gray-800 rounded-lg shadow-xl overflow-hidden bg-white">
         <ReactSketchCanvas
           ref={canvasRef}
@@ -114,7 +109,19 @@ export default function DrawingPage() {
         </button>
       </div>
 
-     
+      {uploadedUrl && (
+        <div className="mt-4 p-4 bg-green-100 rounded-lg">
+          <p className="text-green-800 font-semibold">✅ Dessin sauvegardé !</p>
+          <a 
+            href={uploadedUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 underline text-sm"
+          >
+            Voir sur Cloudinary
+          </a>
+        </div>
+      )}
 
       {/* GALERIE */}
       <div className="w-full max-w-6xl mt-12">
@@ -163,6 +170,6 @@ export default function DrawingPage() {
           </div>
         )}
       </div>
-    </div>
+    </>
   )
 }
