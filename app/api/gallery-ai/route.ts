@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary'
 import { NextResponse } from 'next/server'
+import { imageDescriptions } from '../transform/route' // 👈 Import
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -9,29 +10,25 @@ cloudinary.config({
 
 export async function GET() {
   try {
-    // Récupérer toutes les images du dossier "dessins-ai" avec leur contexte
     const result = await cloudinary.search
       .expression('folder:dessins-ai')
       .sort_by('created_at', 'desc')
-      .with_field('context')  // Important : récupérer le contexte
+      .with_field('context')
       .with_field('tags')
       .max_results(30)
       .execute()
 
-       console.log('========== DEBUG GALLERY AI ==========')
-    console.log('Nombre d\'images:', result.resources.length)
-    result.resources.forEach((img: any) => {
-      console.log('---')
-      console.log('Public ID:', img.public_id)
-      console.log('Context:', JSON.stringify(img.context, null, 2))
-      console.log('Tags:', img.tags)
-      console.log('URL:', img.secure_url)
-    })
-    console.log('====================================')
+    // Enrichir avec les descriptions
+    const enrichedImages = result.resources.map((img: any) => ({
+      ...img,
+      poetic_description: imageDescriptions.get(img.public_id) || 
+                         img.context?.poetic_description ||
+                         null
+    }))
 
     return NextResponse.json({
       success: true,
-      images: result.resources,
+      images: enrichedImages,
     })
   } catch (error) {
     console.error('Erreur récupération gallery AI:', error)

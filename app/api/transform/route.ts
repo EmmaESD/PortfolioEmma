@@ -16,7 +16,10 @@ const openai = new OpenAI({
 
 // Stockage en mémoire des IPs
 const ipUsage = new Map<string, number>()
-const MAX_GENERATIONS = 10
+const MAX_GENERATIONS = 2
+
+// 👇 NOUVEAU : Map pour stocker les descriptions
+export const imageDescriptions = new Map<string, string>()
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,7 +44,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { imageUrl, prompt } = body
+    const { imageUrl, style } = body
 
     if (!imageUrl) {
       return NextResponse.json(
@@ -50,7 +53,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Extraire le public_id du dessin original depuis l'URL Cloudinary
+    // Extraire le public_id du dessin original
     const originalPublicId = imageUrl.match(/\/v\d+\/(.+)\.[^.]+$/)?.[1] || 'unknown'
 
     // Étape 1 : GPT-4 Vision analyse le dessin
@@ -79,20 +82,20 @@ export async function POST(request: NextRequest) {
     const description = visionResponse.choices[0]?.message?.content || "a simple drawing"
 
     // Étape 2 : DALL-E génère une nouvelle image
-    const dallePrompt = `Create a beautiful, artistic and realistic interpretation of this sketch while STRICTLY preserving its original composition, shapes, and line structure. 
+    const dallePrompt = `Create a beautiful interpretation of this sketch in ${style || 'realistic artistic style'} while STRICTLY preserving its original composition, shapes, and line structure. 
 
 The sketch shows: ${description}
 
 IMPORTANT GUIDELINES:
 - Keep the EXACT same layout, proportions and basic forms as the original sketch
-- Enhance with professional artistic techniques: shading, colors, textures, depth
-- Add realistic or abstract details that complement the original lines
-- The result should be recognizable and clearly related to the original sketch
-- Style: artistic, elegant, tasteful, suitable for all audiences
+- Apply the ${style || 'artistic'} aesthetic with appropriate colors, textures and techniques
+- Enhance with professional artistic quality appropriate for this style
+- Add details that complement the original lines while maintaining recognizability
+- The result should be elegant, tasteful, suitable for all audiences
 - NO obscene, violent, or inappropriate content
-- Focus on beauty, harmony and artistic quality
+- Focus on beauty, harmony and artistic excellence in ${style || 'realistic'} style
 
-The final artwork should look like a professional artist took the original sketch and elevated it with colors, shading and refined details, while keeping the soul and structure of the original drawing intact.`
+Transform this sketch into a professional ${style || 'artistic'} masterpiece while preserving its essence and structure.`
 
     const dalleResponse = await openai.images.generate({
       model: "dall-e-3",
@@ -111,18 +114,44 @@ The final artwork should look like a professional artist took the original sketc
       )
     }
 
-    // Sauvegarder l'image générée par l'IA sur Cloudinary avec metadata
+    // 👇 NOUVEAU : Étape 3 - Générer une description poétique de l'image créée
+    const poeticDescriptionResponse = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: "Tu es un poète et critique d'art français. Tu écris des descriptions poétiques et évocatrices des œuvres d'art, en 1 phrase courte et élégante avec maximum 20 mots. Ton style est lyrique, imagé et captivant sans jugement de qualité ni propos obscènes. Ne décris pas littéralement le dessin, soit métaphorique."
+        },
+        {
+          role: "user",
+          content: `Écris une description poétique en français (1 phrase) de cette œuvre d'art ${style ? `de style ${style}` : 'artistique'}. L'œuvre représente : ${description}. Sois évocateur et lyrique, comme un critique d'art dans un musée.`
+        }
+      ],
+      max_tokens: 200,
+      temperature: 0.8, // Plus créatif
+    })
+
+    const poeticDescription = poeticDescriptionResponse.choices[0]?.message?.content || 
+                             "Une création où l'imagination prend vie, transformant les traits simples en une œuvre empreinte de beauté et d'émotion."
+
+    // Sauvegarder l'image générée par l'IA sur Cloudinary
     const uploadResponse = await cloudinary.uploader.upload(aiImageUrl, {
       folder: 'dessins-ai',
       resource_type: 'image',
-      // Ajouter le public_id de l'image originale dans le contexte
       context: {
         original_drawing: originalPublicId,
-        original_url: imageUrl
+        original_url: imageUrl,
+        poetic_description: poeticDescription // 👈 Sauvegarder aussi la description
       },
-      // Optionnel : ajouter des tags pour faciliter la recherche
       tags: ['ai-generated', 'from-sketch']
     })
+
+    // 👇 NOUVEAU : Sauvegarder la description dans la Map
+    imageDescriptions.set(uploadResponse.public_id, poeticDescription)
+
+    console.log('========== DEBUG UPLOAD IA ==========')
+    console.log('Description poétique générée:', poeticDescription)
+    console.log('====================================')
 
     // Incrémenter le compteur pour cette IP
     ipUsage.set(ip, currentUsage + 1)
@@ -134,6 +163,7 @@ The final artwork should look like a professional artist took the original sketc
       aiUrl: uploadResponse.secure_url,
       aiPublicId: uploadResponse.public_id,
       description: description,
+      poeticDescription: poeticDescription, // 👈 Retourner la description poétique
       usage: currentUsage + 1,
       remaining: MAX_GENERATIONS - (currentUsage + 1)
     })

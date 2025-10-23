@@ -14,7 +14,9 @@ interface CloudinaryImage {
     custom?: {
       original_drawing?: string
       original_url?: string
+      poetic_description?: string
     }
+    poetic_description?: string
   }
 }
 
@@ -28,6 +30,7 @@ export default function DrawCanvas() {
   const [galleryAI, setGalleryAI] = useState<CloudinaryImage[]>([])
   const [loadingGallery, setLoadingGallery] = useState(true)
   const [loadingGalleryAI, setLoadingGalleryAI] = useState(true)
+  const [poeticDescription, setPoeticDescription] = useState<string | null>(null)
 
   useEffect(() => {
     loadGalleries()
@@ -69,6 +72,45 @@ export default function DrawCanvas() {
       setLoadingGalleryAI(false)
     }
   }
+
+  // Définir les styles disponibles
+  const styles = {
+    realistic: {
+      name: "🎨 Réaliste",
+      prompt: "realistic artistic style with natural colors, professional shading and depth"
+    },
+    watercolor: {
+      name: "💧 Aquarelle",
+      prompt: "beautiful watercolor painting style with soft, flowing colors and delicate brush strokes"
+    },
+    manga: {
+      name: "📚 Manga",
+      prompt: "Japanese manga/anime art style with bold lines, expressive features and vibrant colors"
+    },
+    oil: {
+      name: "🖌️ Peinture à l'huile",
+      prompt: "classical oil painting style with rich textures, deep colors and masterful brushwork"
+    },
+    pixel: {
+      name: "🎮 Pixel Art",
+      prompt: "retro pixel art style with clean pixels, vibrant colors and video game aesthetic"
+    },
+    sketch: {
+      name: "✏️ Croquis raffiné",
+      prompt: "refined pencil sketch with professional shading, cross-hatching and artistic details"
+    },
+    abstract: {
+      name: "🌈 Abstrait",
+      prompt: "modern abstract art with bold shapes, vibrant colors and creative composition"
+    },
+    cyberpunk: {
+      name: "🌃 Cyberpunk",
+      prompt: "futuristic cyberpunk style with neon colors, digital effects and sci-fi atmosphere"
+    }
+  }
+
+  type StyleKey = keyof typeof styles
+  const [selectedStyle, setSelectedStyle] = useState<StyleKey>('realistic')
 
   const handleClear = () => {
     canvasRef.current?.clearCanvas()
@@ -119,6 +161,7 @@ export default function DrawCanvas() {
     }
 
     setTransforming(true)
+    setPoeticDescription(null)
     
     try {
       const response = await fetch('/api/transform', {
@@ -128,7 +171,7 @@ export default function DrawCanvas() {
         },
         body: JSON.stringify({ 
           imageUrl: uploadedUrl,
-          prompt: "Transform this sketch into a beautiful, colorful artistic masterpiece"
+          style: styles[selectedStyle].prompt
         }),
       })
 
@@ -136,6 +179,7 @@ export default function DrawCanvas() {
 
       if (data.success) {
         setAiImageUrl(data.aiUrl)
+        setPoeticDescription(data.poeticDescription)
         alert(`Transformation réussie ! 🎨✨\n\nGénérations restantes : ${data.remaining || '?'}`)
         await loadGalleryAI()
       } else {
@@ -200,6 +244,49 @@ export default function DrawCanvas() {
         </div>
       )}
 
+      {uploadedUrl && (
+        <div className="w-full max-w-4xl mt-8 p-6 from-purple-50 to-pink-50 rounded-xl border-2 border-purple-200">
+          <h3 className="text-2xl font-bold text-center mb-4 text-purple-800">
+            ✨ Transforme ton dessin avec l'IA
+          </h3>
+          <p className="text-center text-gray-600 mb-6">
+            Choisis un style artistique pour ta création
+          </p>
+
+          {/* Grille de boutons de styles */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {(Object.entries(styles) as [StyleKey, { name: string; prompt: string }][]).map(([key, style]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedStyle(key)}
+                className={`px-4 py-3 rounded-lg font-semibold transition-all ${
+                  selectedStyle === key
+                    ? 'bg-purple-600 text-white shadow-lg scale-105'
+                    : 'bg-white text-gray-700 hover:bg-purple-100 border-2 border-purple-200'
+                }`}
+                disabled={transforming}
+              >
+                {style.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Bouton de transformation */}
+          <button 
+            onClick={handleTransform}
+            className="w-full px-6 py-4 cursor-pointer from-purple-600 to-pink-600 text-white rounded-lg font-bold text-lg transition-all hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={transforming}
+          >
+            {transforming ? '✨ Transformation en cours...' : `🤖 Transformer en ${styles[selectedStyle].name}`}
+          </button>
+
+          <p className="text-center text-sm text-gray-500 mt-4">
+            Style sélectionné : <span className="font-semibold text-purple-600">{styles[selectedStyle].name}</span>
+          </p>
+        </div>
+      )}
+
+
       {aiImageUrl && (
         <div className="mt-4 p-6 bg-purple-100 rounded-lg border-2 border-purple-300">
           <p className="text-purple-800 font-bold mb-4">✨ Transformation IA réussie !</p>
@@ -211,6 +298,14 @@ export default function DrawCanvas() {
               className="object-contain rounded-lg"
             />
           </div>
+            {poeticDescription && (
+                        <div className="mb-4 p-4 bg-white rounded-lg shadow-md border-l-4 border-purple-500">
+                          <p className="text-gray-700 italic text-base leading-relaxed">
+                            "{poeticDescription}"
+                          </p>
+                        </div>
+                      )}
+
           <a 
             href={aiImageUrl} 
             target="_blank" 
@@ -220,7 +315,8 @@ export default function DrawCanvas() {
             Voir en grand
           </a>
         </div>
-      )}
+        )}
+          
 
       {/* GALERIE IMAGES IA AVEC ORIGINAUX */}
       <div className="w-full max-w-7xl mt-16">
@@ -236,7 +332,9 @@ export default function DrawCanvas() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {galleryAI.map((aiImage: any) => {
               const originalUrl = aiImage.context?.original_url || null
-              
+              const poeticDesc = aiImage.poetic_description || 
+                               aiImage.context?.poetic_description ||
+                               null
               return (
                 <div 
                   key={aiImage.public_id}
@@ -279,6 +377,16 @@ export default function DrawCanvas() {
                       </div>
                     </div>
                   </div>
+
+                  {poeticDesc && (
+                    <div className="px-4 pb-4">
+                      <div className="p-3 from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-400">
+                        <p className="text-sm text-gray-700 italic leading-relaxed">
+                          "{poeticDesc}"
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="mt-4 text-center">
                     <p className="text-sm text-gray-500 mb-2">
