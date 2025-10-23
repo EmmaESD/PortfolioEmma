@@ -210,46 +210,46 @@ export default function DrawCanvas() {
           {/* Étape 1 */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
-              currentStep >= 1 ? 'bg-purple-600 text-white' : 'bg-gray-300 text-gray-600'
+              currentStep >= 1 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               1
             </div>
             <p className={`text-sm mt-2 font-semibold ${
-              currentStep >= 1 ? 'text-purple-600' : 'text-gray-500'
+              currentStep >= 1 ? 'text-accent' : 'text-gray-500'
             }`}>
               Dessiner
             </p>
           </div>
 
           {/* Ligne de connexion */}
-          <div className={`flex-1 h-1 ${currentStep >= 2 ? 'bg-purple-600' : 'bg-gray-300'}`}></div>
+          <div className={`flex-1 h-1 ${currentStep >= 2 ? 'bg-accent' : 'bg-gray-300'}`}></div>
 
           {/* Étape 2 */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
-              currentStep >= 2 ? 'bg-purple-600 text-white' : 'bg-gray-300 text-gray-600'
+              currentStep >= 2 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               2
             </div>
             <p className={`text-sm mt-2 font-semibold ${
-              currentStep >= 2 ? 'text-purple-600' : 'text-gray-500'
+              currentStep >= 2 ? 'text-accent' : 'text-black'
             }`}>
               Choisir le style
             </p>
           </div>
 
           {/* Ligne de connexion */}
-          <div className={`flex-1 h-1 ${currentStep >= 3 ? 'bg-purple-600' : 'bg-gray-300'}`}></div>
+          <div className={`flex-1 h-1 ${currentStep >= 3 ? 'bg-accent' : 'bg-gray-300'}`}></div>
 
           {/* Étape 3 */}
           <div className="flex flex-col items-center flex-1">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
-              currentStep >= 3 ? 'bg-purple-600 text-white' : 'bg-gray-300 text-gray-600'
+              currentStep >= 3 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               3
             </div>
             <p className={`text-sm mt-2 font-semibold ${
-              currentStep >= 3 ? 'text-purple-600' : 'text-gray-500'
+              currentStep >= 3 ? 'text-accent' : 'text-black'
             }`}>
               Résultat
             </p>
@@ -260,7 +260,7 @@ export default function DrawCanvas() {
       {/* ÉTAPE 1 : ZONE DE DESSIN */}
       {currentStep === 1 && (
         <div className="flex flex-col items-center gap-6">
-          <h2 className="text-2xl font-bold text-gray-800">✏️ Dessine ta création</h2>
+          <h2 >Laissez votre empreinte</h2>
           
           <div className="border-4 border-gray-800 rounded-lg shadow-xl overflow-hidden bg-white">
             <ReactSketchCanvas
@@ -268,8 +268,8 @@ export default function DrawCanvas() {
               strokeWidth={3}
               strokeColor="#000000"
               canvasColor="#FFFFFF"
-              width="800px"
-              height="600px"
+              width="600px"
+              height="400px"
             />
           </div>
 
@@ -341,7 +341,7 @@ export default function DrawCanvas() {
             </button>
             <button 
               onClick={handleTransform}
-              className="px-8 py-3 cursor-pointer bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-bold text-lg transition hover:shadow-xl hover:scale-105 disabled:opacity-50"
+              className="px-8 py-3 cursor-pointer  from-purple-600 to-pink-600 text-white rounded-lg font-bold text-lg transition hover:shadow-xl hover:scale-105 disabled:opacity-50"
               disabled={transforming}
             >
               {transforming ? '✨ Transformation en cours...' : '🚀 Lancer la magie !'}
@@ -353,7 +353,7 @@ export default function DrawCanvas() {
       {/* ÉTAPE 3 : RÉSULTAT */}
       {currentStep === 3 && (
         <div className="flex flex-col items-center gap-6 w-full max-w-4xl">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold  from-purple-600 to-pink-600 bg-clip-text text-transparent">
             ✨ Ta création est prête !
           </h2>
 
@@ -395,7 +395,7 @@ export default function DrawCanvas() {
 
             {/* Description poétique */}
             {poeticDescription && (
-              <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500">
+              <div className="mt-6 p-4  from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500">
                 <p className="text-gray-700 italic text-lg leading-relaxed text-center">
                   "{poeticDescription}"
                 </p>
@@ -430,7 +430,7 @@ export default function DrawCanvas() {
           {/* Bouton recommencer */}
           <button 
             onClick={handleRestart}
-            className="px-8 py-4 cursor-pointer bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-xl font-bold text-lg transition hover:shadow-xl hover:scale-105"
+            className="px-8 py-4 cursor-pointer  from-green-500 to-teal-500 text-white rounded-xl font-bold text-lg transition hover:shadow-xl hover:scale-105"
           >
             🎨 Créer un nouveau dessin
           </button>
@@ -441,7 +441,7 @@ export default function DrawCanvas() {
       <div className="w-full max-w-7xl mt-20 border-t-2 border-gray-200 pt-12">
         {/* GALERIE IMAGES IA */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold mb-6 text-center  from-purple-600 to-pink-600 bg-clip-text text-transparent">
             ✨ Galerie des transformations IA
           </h2>
           
