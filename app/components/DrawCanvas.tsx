@@ -10,6 +10,12 @@ interface CloudinaryImage {
   created_at: string
   width: number
   height: number
+  context?: {
+    custom?: {
+      original_drawing?: string
+      original_url?: string
+    }
+  }
 }
 
 export default function DrawCanvas() {
@@ -19,11 +25,20 @@ export default function DrawCanvas() {
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const [aiImageUrl, setAiImageUrl] = useState<string | null>(null)
   const [gallery, setGallery] = useState<CloudinaryImage[]>([])
+  const [galleryAI, setGalleryAI] = useState<CloudinaryImage[]>([])
   const [loadingGallery, setLoadingGallery] = useState(true)
+  const [loadingGalleryAI, setLoadingGalleryAI] = useState(true)
 
   useEffect(() => {
-    loadGallery()
+    loadGalleries()
   }, [])
+
+  const loadGalleries = async () => {
+    await Promise.all([
+      loadGallery(),
+      loadGalleryAI()
+    ])
+  }
 
   const loadGallery = async () => {
     try {
@@ -37,6 +52,21 @@ export default function DrawCanvas() {
       console.error('Erreur chargement galerie:', error)
     } finally {
       setLoadingGallery(false)
+    }
+  }
+
+  const loadGalleryAI = async () => {
+    try {
+      const response = await fetch('/api/gallery-ai')
+      const data = await response.json()
+      
+      if (data.success) {
+        setGalleryAI(data.images)
+      }
+    } catch (error) {
+      console.error('Erreur chargement galerie IA:', error)
+    } finally {
+      setLoadingGalleryAI(false)
     }
   }
 
@@ -106,8 +136,8 @@ export default function DrawCanvas() {
 
       if (data.success) {
         setAiImageUrl(data.aiUrl)
-        alert('Transformation réussie ! 🎨✨')
-        await loadGallery()
+        alert(`Transformation réussie ! 🎨✨\n\nGénérations restantes : ${data.remaining || '?'}`)
+        await loadGalleryAI()
       } else {
         alert('Erreur lors de la transformation : ' + data.error)
       }
@@ -192,14 +222,113 @@ export default function DrawCanvas() {
         </div>
       )}
 
-      {/* GALERIE */}
-      <div className="w-full max-w-6xl mt-12">
-        <h2 className="text-3xl font-bold mb-6 text-center">Galerie de dessins</h2>
+      {/* GALERIE IMAGES IA AVEC ORIGINAUX */}
+      <div className="w-full max-w-7xl mt-16">
+        <h2 className="text-3xl font-bold mb-6 text-center from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          ✨ Galerie des transformations IA
+        </h2>
+        
+        {loadingGalleryAI ? (
+          <p className="text-center text-gray-500">Chargement de la galerie IA...</p>
+        ) : galleryAI.length === 0 ? (
+          <p className="text-center text-gray-500">Aucune création IA pour le moment. Transforme ton premier dessin ! 🎨</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {galleryAI.map((aiImage: any) => {
+              const originalUrl = aiImage.context?.original_url || null
+              
+              return (
+                <div 
+                  key={aiImage.public_id}
+                  className="border-2 border-purple-300 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white p-4"
+                >
+                  <h3 className="text-lg font-bold text-purple-700 mb-4 text-center">
+                    Avant → Après
+                  </h3>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Dessin original */}
+                    <div className="space-y-2">
+                      <p className="text-xs text-gray-600 font-semibold text-center">✏️ Original</p>
+                      {originalUrl ? (
+                        <div className="relative w-full h-48 border-2 border-gray-300 rounded-lg overflow-hidden">
+                          <Image
+                            src={originalUrl}
+                            alt="Dessin original"
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full h-48 border-2 border-gray-300 rounded-lg bg-gray-100 flex items-center justify-center">
+                          <p className="text-gray-400 text-sm">Original non disponible</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Image IA */}
+                    <div className="space-y-2">
+                      <p className="text-xs text-purple-600 font-semibold text-center">🤖 IA</p>
+                      <div className="relative w-full h-48 border-2 border-purple-300 rounded-lg overflow-hidden">
+                        <Image
+                          src={aiImage.secure_url}
+                          alt="Création IA"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 text-center">
+                    <p className="text-sm text-gray-500 mb-2">
+                      {new Date(aiImage.created_at).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
+                    <div className="flex gap-2 justify-center">
+                      {originalUrl && (
+                        <a 
+                          href={originalUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline text-sm"
+                        >
+                          Voir l'original
+                        </a>
+                      )}
+                      <span className="text-gray-400">•</span>
+                      <a 
+                        href={aiImage.secure_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-purple-600 hover:underline text-sm"
+                      >
+                        Voir la version IA
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* GALERIE DESSINS ORIGINAUX */}
+      <div className="w-full max-w-6xl mt-16 mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          🎨 Galerie des dessins originaux
+        </h2>
         
         {loadingGallery ? (
           <p className="text-center text-gray-500">Chargement de la galerie...</p>
         ) : gallery.length === 0 ? (
-          <p className="text-center text-gray-500">Aucun dessin pour le moment. Crée ton premier chef-d'œuvre ! 🎨</p>
+          <p className="text-center text-gray-500">Aucun dessin pour le moment. Crée ton premier chef-d'œuvre ! ✏️</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {gallery.map((image) => (
@@ -216,6 +345,7 @@ export default function DrawCanvas() {
                   />
                 </div>
                 <div className="p-4">
+                  <p className="text-xs text-gray-600 font-semibold mb-1">✏️ Dessin original</p>
                   <p className="text-sm text-gray-500">
                     {new Date(image.created_at).toLocaleDateString('fr-FR', {
                       day: 'numeric',
