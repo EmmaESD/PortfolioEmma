@@ -15,7 +15,9 @@ interface CloudinaryImage {
 export default function DrawCanvas() {
   const canvasRef = useRef<ReactSketchCanvasRef>(null)
   const [uploading, setUploading] = useState(false)
+  const [transforming, setTransforming] = useState(false)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
+  const [aiImageUrl, setAiImageUrl] = useState<string | null>(null)
   const [gallery, setGallery] = useState<CloudinaryImage[]>([])
   const [loadingGallery, setLoadingGallery] = useState(true)
 
@@ -41,6 +43,7 @@ export default function DrawCanvas() {
   const handleClear = () => {
     canvasRef.current?.clearCanvas()
     setUploadedUrl(null)
+    setAiImageUrl(null)
   }
 
   const handleSave = async () => {
@@ -79,6 +82,43 @@ export default function DrawCanvas() {
     }
   }
 
+  const handleTransform = async () => {
+    if (!uploadedUrl) {
+      alert('Veuillez d\'abord sauvegarder votre dessin')
+      return
+    }
+
+    setTransforming(true)
+    
+    try {
+      const response = await fetch('/api/transform', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          imageUrl: uploadedUrl,
+          prompt: "Transform this sketch into a beautiful, colorful artistic masterpiece"
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setAiImageUrl(data.aiUrl)
+        alert('Transformation réussie ! 🎨✨')
+        await loadGallery()
+      } else {
+        alert('Erreur lors de la transformation : ' + data.error)
+      }
+    } catch (error) {
+      console.error('Erreur:', error)
+      alert('Erreur lors de la transformation IA')
+    } finally {
+      setTransforming(false)
+    }
+  }
+
   return (
     <>
       <div className="border-4 border-gray-800 rounded-lg shadow-xl overflow-hidden bg-white">
@@ -95,17 +135,24 @@ export default function DrawCanvas() {
       <div className="flex gap-4">
         <button 
           onClick={handleClear}
-          className="px-6 py-3 cursor-pointer bg-accent text-white rounded-lg font-semibold transition"
-          disabled={uploading}
+          className="px-6 py-3 cursor-pointer bg-gray-500 text-white rounded-lg font-semibold transition"
+          disabled={uploading || transforming}
         >
           Effacer
         </button>
         <button 
           onClick={handleSave}
-          className="px-6 py-3 cursor-pointer bg-tag-pro text-white rounded-lg font-semibold transition disabled:opacity-50"
-          disabled={uploading}
+          className="px-6 py-3 cursor-pointer bg-blue-500 text-white rounded-lg font-semibold transition disabled:opacity-50"
+          disabled={uploading || transforming}
         >
-          {uploading ? 'Upload en cours...' : 'Valider'}
+          {uploading ? 'Upload en cours...' : 'Sauvegarder'}
+        </button>
+        <button 
+          onClick={handleTransform}
+          className="px-6 py-3 cursor-pointer bg-purple-600 text-white rounded-lg font-semibold transition disabled:opacity-50"
+          disabled={!uploadedUrl || uploading || transforming}
+        >
+          {transforming ? '✨ Transformation...' : '🤖 Transformer avec IA'}
         </button>
       </div>
 
@@ -119,6 +166,28 @@ export default function DrawCanvas() {
             className="text-blue-600 underline text-sm"
           >
             Voir sur Cloudinary
+          </a>
+        </div>
+      )}
+
+      {aiImageUrl && (
+        <div className="mt-4 p-6 bg-purple-100 rounded-lg border-2 border-purple-300">
+          <p className="text-purple-800 font-bold mb-4">✨ Transformation IA réussie !</p>
+          <div className="relative w-full h-96">
+            <Image
+              src={aiImageUrl}
+              alt="Version IA"
+              fill
+              className="object-contain rounded-lg"
+            />
+          </div>
+          <a 
+            href={aiImageUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-purple-600 underline text-sm mt-2 inline-block"
+          >
+            Voir en grand
           </a>
         </div>
       )}
