@@ -115,7 +115,7 @@ export default async function Home() {
                 <h5 className="text-center">Mon profil vous intéresse ?</h5>
                 <a 
                   href="/assets/CV_vaysse_emma.pdf" 
-                  className="bg-accent text-white px-5 py-2 lg:px-[20px] lg:py-[10px] rounded-xl hover:bg-secondary transition-colors text-sm lg:text-base" 
+                  className="bg-accent text-white px-5 py-4  rounded-xl hover:bg-secondary transition-colors text-sm lg:text-base" 
                   download
                 >
                   Télécharger mon CV
