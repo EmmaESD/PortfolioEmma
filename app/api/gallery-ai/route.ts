@@ -8,6 +8,20 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
+interface CloudinaryResource {
+  public_id: string
+  secure_url: string
+  created_at: string
+  width: number
+  height: number
+  context?: {
+    original_drawing?: string
+    original_url?: string
+    poetic_description?: string
+  }
+  tags?: string[]
+}
+
 export async function GET() {
   try {
     const result = await cloudinary.search
@@ -19,7 +33,7 @@ export async function GET() {
       .execute()
 
     // Enrichir avec les descriptions
-    const enrichedImages = result.resources.map((img: any) => ({
+    const enrichedImages = result.resources.map((img: CloudinaryResource) => ({
       ...img,
       poetic_description: imageDescriptions.get(img.public_id) || 
                          img.context?.poetic_description ||

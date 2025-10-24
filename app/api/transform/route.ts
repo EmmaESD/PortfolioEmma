@@ -167,11 +167,14 @@ Transform this sketch into a professional ${style || 'artistic'} masterpiece whi
       usage: currentUsage + 1,
       remaining: MAX_GENERATIONS - (currentUsage + 1)
     })
-  } catch (error: any) {
-    console.error('Erreur transformation IA:', error)
-    return NextResponse.json(
-      { success: false, error: error.message || 'Erreur lors de la transformation' },
-      { status: 500 }
-    )
-  }
+  } catch (error) {
+  console.error('Erreur transformation IA:', error)
+  
+  const errorMessage = error instanceof Error ? error.message : 'Erreur lors de la transformation'
+  
+  return NextResponse.json(
+    { success: false, error: errorMessage },
+    { status: 500 }
+  )
+}
 }

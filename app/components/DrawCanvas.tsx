@@ -239,7 +239,7 @@ export default function DrawCanvas() {
       {currentStep === 1 && (
         <div className="flex flex-col items-center gap-6">
           <h4>Laissez votre empreinte</h4>
-          <p>Attention, vous ne disposez que d'un seul essai !</p>
+          <p>Attention, vous ne disposez que d&apos;un seul essai !</p>
           
           <div className="border-4 border-black rounded-lg shadow-2xl overflow-hidden bg-white">
             <ReactSketchCanvas
@@ -366,7 +366,7 @@ export default function DrawCanvas() {
             {poeticDescription && (
               <div className="p-4 rounded-lg border-l-4 border-accent">
                 <p className="text-black italic leading-relaxed text-center">
-                  "{poeticDescription}"
+                  &quot;{poeticDescription}&quot;
                 </p>
               </div>
             )}
@@ -380,7 +380,7 @@ export default function DrawCanvas() {
                   rel="noopener noreferrer"
                 >
                     <button className='p-3 bg-accent text-white hover:scale-105 rounded-lg cursor-pointer transition'>
-                  Télécharger l'original
+                  Télécharger l&apos;original
                   </button>
                 </a>
               )}
