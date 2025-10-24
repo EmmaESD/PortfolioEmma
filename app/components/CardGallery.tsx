@@ -37,7 +37,7 @@ export function GalleryCard({ aiImage }: GalleryCardProps) {
         {poeticDesc && !showOriginal && (
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
             <p className="text-white italic text-sm leading-relaxed">
-              "{poeticDesc}"
+              &quot;{poeticDesc}&quot;
             </p>
           </div>
         )}
