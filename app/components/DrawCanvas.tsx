@@ -206,7 +206,7 @@ export default function DrawCanvas() {
       <div className="w-full lg:px-30 ">
         <div className="flex items-center justify-between w-full">
           {/* Étape 1 */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center flex-1">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
               currentStep >= 1 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>

@@ -1,6 +1,7 @@
 import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
+import { kv } from '@vercel/kv'
 
 // Config Cloudinary
 cloudinary.config({
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
                'unknown'
 
     // Vérifier le quota
-    const currentUsage = ipUsage.get(ip) || 0
+   const currentUsage = await kv.get<number>(`ip:${ip}`) || 0
 
     if (currentUsage >= MAX_GENERATIONS) {
       return NextResponse.json(
@@ -153,8 +154,7 @@ Transform this sketch into a professional ${style || 'artistic'} masterpiece whi
     console.log('Description poétique générée:', poeticDescription)
     console.log('====================================')
 
-    // Incrémenter le compteur pour cette IP
-    ipUsage.set(ip, currentUsage + 1)
+    await kv.set(`ip:${ip}`, currentUsage + 1)
 
     return NextResponse.json({
       success: true,
