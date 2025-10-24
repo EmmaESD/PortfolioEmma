@@ -25,7 +25,7 @@ export default function ProjectsPage() {
         </div>
 
         <h1 className="text-2xl relative z-10">Mes projets</h1>
-        <p className="relative z-10 text-center">Découvrez mes projets persos et d'école !</p>
+        <p className="relative z-10 text-center">Découvrez mes projets persos et d&apos;école !</p>
       </div>
 
       
