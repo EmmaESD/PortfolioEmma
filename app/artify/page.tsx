@@ -1,7 +1,11 @@
+'use client'
+
+import { useState } from "react";
 import DrawCanvas from "../components/DrawCanvas";
 import Gallery from "../components/Gallery";
 
 export default function DrawingPage() {
+  const [galleryReloadTrigger, setGalleryReloadTrigger] = useState(0)
   return (
     <div className="min-h-screen flex flex-col items-center gap-30 p-10 lg:p-20 w-full typography">
       {/* Section titre avec cercle blur */}
@@ -33,8 +37,8 @@ export default function DrawingPage() {
       </div>
 
       <div className="w-full flex flex-col gap-42 items-center">
-        <DrawCanvas />
-        <Gallery/>
+        <DrawCanvas onImageTransformed={() => setGalleryReloadTrigger(prev => prev + 1)} />
+        <Gallery triggerReload={galleryReloadTrigger} />
       </div>
     </div>
   )
