@@ -16,7 +16,7 @@ const openai = new OpenAI({
 
 // Stockage en mémoire des IPs
 const ipUsage = new Map<string, number>()
-const MAX_GENERATIONS = 2
+const MAX_GENERATIONS = 1
 
 // 👇 NOUVEAU : Map pour stocker les descriptions
 export const imageDescriptions = new Map<string, string>()
