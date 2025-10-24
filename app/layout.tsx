@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 const jaro = Jaro({
   subsets: ['latin'],
   variable: '--font-jaro',
-  weight: ['400'],
   display: 'swap',
 })
 
@@ -60,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${geistSans.variable} ${geistMono.variable} ${jaro.variable} ${jetbrainsMono.variable}`}>
       <body
-        className={`${jetbrainsMono.className} antialiased min-h-screen flex flex-col bg-primary`}
+        className={`${jetbrainsMono.className} ${jaro.variable} antialiased min-h-screen flex flex-col bg-primary`}
       >
         <NavBar/>
         {children}

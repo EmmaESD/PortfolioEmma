@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { ReactSketchCanvas, ReactSketchCanvasRef } from 'react-sketch-canvas'
 import Image from 'next/image'
 
+
 interface CloudinaryImage {
   public_id: string
   secure_url: string
@@ -26,88 +27,33 @@ export default function DrawCanvas() {
   const [transforming, setTransforming] = useState(false)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const [aiImageUrl, setAiImageUrl] = useState<string | null>(null)
-  const [gallery, setGallery] = useState<CloudinaryImage[]>([])
-  const [galleryAI, setGalleryAI] = useState<CloudinaryImage[]>([])
   const [loadingGallery, setLoadingGallery] = useState(true)
   const [loadingGalleryAI, setLoadingGalleryAI] = useState(true)
+  const [gallery, setGallery] = useState<CloudinaryImage[]>([])
+  const [galleryAI, setGalleryAI] = useState<CloudinaryImage[]>([])
   const [poeticDescription, setPoeticDescription] = useState<string | null>(null)
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
 
-  useEffect(() => {
-    loadGalleries()
-  }, [])
-
-  const loadGalleries = async () => {
-    await Promise.all([
-      loadGallery(),
-      loadGalleryAI()
-    ])
-  }
-
-  const loadGallery = async () => {
-    try {
-      const response = await fetch('/api/gallery')
-      const data = await response.json()
-      
-      if (data.success) {
-        setGallery(data.images)
-      }
-    } catch (error) {
-      console.error('Erreur chargement galerie:', error)
-    } finally {
-      setLoadingGallery(false)
-    }
-  }
-
-  const loadGalleryAI = async () => {
-    try {
-      const response = await fetch('/api/gallery-ai')
-      const data = await response.json()
-      
-      if (data.success) {
-        setGalleryAI(data.images)
-      }
-    } catch (error) {
-      console.error('Erreur chargement galerie IA:', error)
-    } finally {
-      setLoadingGalleryAI(false)
-    }
-  }
+  
 
   // Définir les styles disponibles
   const styles = {
     realistic: {
-      name: "🎨 Réaliste",
+      name: "Réaliste",
       prompt: "realistic artistic style with natural colors, professional shading and depth"
     },
     watercolor: {
-      name: "💧 Aquarelle",
+      name: "Aquarelle",
       prompt: "beautiful watercolor painting style with soft, flowing colors and delicate brush strokes"
     },
-    manga: {
-      name: "📚 Manga",
-      prompt: "Japanese manga/anime art style with bold lines, expressive features and vibrant colors"
-    },
     oil: {
-      name: "🖌️ Peinture à l'huile",
+      name: "Peinture à l'huile",
       prompt: "classical oil painting style with rich textures, deep colors and masterful brushwork"
     },
     pixel: {
-      name: "🎮 Pixel Art",
+      name: "Pixel Art",
       prompt: "retro pixel art style with clean pixels, vibrant colors and video game aesthetic"
     },
-    sketch: {
-      name: "✏️ Croquis raffiné",
-      prompt: "refined pencil sketch with professional shading, cross-hatching and artistic details"
-    },
-    abstract: {
-      name: "🌈 Abstrait",
-      prompt: "modern abstract art with bold shapes, vibrant colors and creative composition"
-    },
-    cyberpunk: {
-      name: "🌃 Cyberpunk",
-      prompt: "futuristic cyberpunk style with neon colors, digital effects and sci-fi atmosphere"
-    }
   }
 
   type StyleKey = keyof typeof styles
@@ -155,6 +101,47 @@ export default function DrawCanvas() {
     }
   }
 
+  useEffect(() => {
+        loadGalleries()
+      }, [])
+    
+      const loadGalleries = async () => {
+        await Promise.all([
+          loadGallery(),
+          loadGalleryAI()
+        ])
+      }
+    
+      const loadGallery = async () => {
+        try {
+          const response = await fetch('/api/gallery')
+          const data = await response.json()
+          
+          if (data.success) {
+            setGallery(data.images)
+          }
+        } catch (error) {
+          console.error('Erreur chargement galerie:', error)
+        } finally {
+          setLoadingGallery(false)
+        }
+      }
+    
+      const loadGalleryAI = async () => {
+        try {
+          const response = await fetch('/api/gallery-ai')
+          const data = await response.json()
+          
+          if (data.success) {
+            setGalleryAI(data.images)
+          }
+        } catch (error) {
+          console.error('Erreur chargement galerie IA:', error)
+        } finally {
+          setLoadingGalleryAI(false)
+        }
+      }
+
   const handleTransform = async () => {
     if (!uploadedUrl) {
       alert('Erreur : aucun dessin sauvegardé')
@@ -193,28 +180,19 @@ export default function DrawCanvas() {
     }
   }
 
-  const handleRestart = () => {
-    setCurrentStep(1)
-    setUploadedUrl(null)
-    setAiImageUrl(null)
-    setPoeticDescription(null)
-    setSelectedStyle('realistic')
-    canvasRef.current?.clearCanvas()
-  }
-
   return (
-    <>
+    <main className='flex flex-col items-center gap-8 px-12 w-full'>
       {/* Indicateur d'étapes */}
-      <div className="w-full max-w-2xl mb-8">
+      <div className="w-full px-44">
         <div className="flex items-center justify-between">
           {/* Étape 1 */}
           <div className="flex flex-col items-center flex-1">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
               currentStep >= 1 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               1
             </div>
-            <p className={`text-sm mt-2 font-semibold ${
+            <p className={` ${
               currentStep >= 1 ? 'text-accent' : 'text-gray-500'
             }`}>
               Dessiner
@@ -226,12 +204,12 @@ export default function DrawCanvas() {
 
           {/* Étape 2 */}
           <div className="flex flex-col items-center flex-1">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
               currentStep >= 2 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               2
             </div>
-            <p className={`text-sm mt-2 font-semibold ${
+            <p className={`w-full text-center ${
               currentStep >= 2 ? 'text-accent' : 'text-black'
             }`}>
               Choisir le style
@@ -243,12 +221,12 @@ export default function DrawCanvas() {
 
           {/* Étape 3 */}
           <div className="flex flex-col items-center flex-1">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
               currentStep >= 3 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
               3
             </div>
-            <p className={`text-sm mt-2 font-semibold ${
+            <p className={` ${
               currentStep >= 3 ? 'text-accent' : 'text-black'
             }`}>
               Résultat
@@ -260,9 +238,10 @@ export default function DrawCanvas() {
       {/* ÉTAPE 1 : ZONE DE DESSIN */}
       {currentStep === 1 && (
         <div className="flex flex-col items-center gap-6">
-          <h2 >Laissez votre empreinte</h2>
+          <h4>Laissez votre empreinte</h4>
+          <p>Attention, vous ne disposez que d'un seul essai !</p>
           
-          <div className="border-4 border-gray-800 rounded-lg shadow-xl overflow-hidden bg-white">
+          <div className="border-4 border-black rounded-lg shadow-2xl overflow-hidden bg-white">
             <ReactSketchCanvas
               ref={canvasRef}
               strokeWidth={3}
@@ -276,16 +255,16 @@ export default function DrawCanvas() {
           <div className="flex gap-4">
             <button 
               onClick={handleClear}
-              className="px-6 py-3 cursor-pointer bg-gray-500 text-white rounded-lg font-semibold transition hover:bg-gray-600"
+              className=" px-3 cursor-pointer bg-tag-ecole text-white rounded-lg transition hover:scale-105"
             >
               Effacer
             </button>
             <button 
               onClick={handleValidateDrawing}
-              className="px-8 py-3 cursor-pointer bg-purple-600 text-white rounded-lg font-bold text-lg transition hover:bg-purple-700 hover:scale-105 disabled:opacity-50"
+              className="px-3 py-3 cursor-pointer bg-tag-pro text-white rounded-lg transition hover:scale-105 disabled:opacity-50"
               disabled={uploading}
             >
-              {uploading ? '⏳ Sauvegarde...' : '✅ Valider et continuer'}
+              {uploading ? '⏳ Sauvegarde...' : 'Valider et continuer'}
             </button>
           </div>
         </div>
@@ -293,33 +272,33 @@ export default function DrawCanvas() {
 
       {/* ÉTAPE 2 : CHOIX DU STYLE */}
       {currentStep === 2 && (
-        <div className="flex flex-col items-center gap-6 w-full max-w-4xl">
-          <h2 className="text-2xl font-bold text-gray-800">🎨 Choisis un style artistique</h2>
-
+        <div className="flex flex-col items-center gap-6 w-full">
+          <h4 className=" text-black">Choisissez un style artistique</h4>
+            <div className='flex justify-center w-full gap-8 items-center'>
           {/* Aperçu du dessin */}
           {uploadedUrl && (
-            <div className="relative w-64 h-48 border-2 border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
+            <div className="relative w-96 h-80 border-2 border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
               <Image
                 src={uploadedUrl}
                 alt="Ton dessin"
                 fill
-                className="object-contain"
+                className="object-fill"
               />
             </div>
           )}
 
           {/* Grille de styles */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-2">
             {(Object.keys(styles) as StyleKey[]).map((key) => {
               const style = styles[key]
               return (
                 <button
                   key={key}
                   onClick={() => setSelectedStyle(key)}
-                  className={`px-6 py-4 rounded-xl font-semibold transition-all ${
+                  className={`p-3 h-15 rounded-xl transition-all cursor-pointer ${
                     selectedStyle === key
-                      ? 'bg-purple-600 text-white shadow-xl scale-105 border-4 border-purple-400'
-                      : 'bg-white text-gray-700 hover:bg-purple-50 border-2 border-gray-300 hover:border-purple-300'
+                      ? 'bg-tag-perso text-white'
+                      : 'bg-white text-black hover:scale-105 border-2 border-tag-perso'
                   }`}
                 >
                   {style.name}
@@ -327,24 +306,19 @@ export default function DrawCanvas() {
               )
             })}
           </div>
+          </div>
 
-          <p className="text-gray-600">
-            Style sélectionné : <span className="font-bold text-purple-600">{styles[selectedStyle].name}</span>
+          <p className="text-black">
+            Style sélectionné : <span className=" text-accent">{styles[selectedStyle].name}</span>
           </p>
 
           <div className="flex gap-4">
             <button 
-              onClick={handleRestart}
-              className="px-6 py-3 cursor-pointer bg-gray-400 text-white rounded-lg font-semibold transition hover:bg-gray-500"
-            >
-              ← Retour au dessin
-            </button>
-            <button 
               onClick={handleTransform}
-              className="px-8 py-3 cursor-pointer  from-purple-600 to-pink-600 text-white rounded-lg font-bold text-lg transition hover:shadow-xl hover:scale-105 disabled:opacity-50"
+              className="px-8 py-3 cursor-pointer  from-tag-perso to-tag-pro bg-accent text-white rounded-lg transition hover:scale-105 disabled:opacity-50"
               disabled={transforming}
             >
-              {transforming ? '✨ Transformation en cours...' : '🚀 Lancer la magie !'}
+              {transforming ? 'Transformation en cours...' : 'Lancer la magie !'}
             </button>
           </div>
         </div>
@@ -353,18 +327,14 @@ export default function DrawCanvas() {
       {/* ÉTAPE 3 : RÉSULTAT */}
       {currentStep === 3 && (
         <div className="flex flex-col items-center gap-6 w-full max-w-4xl">
-          <h2 className="text-3xl font-bold  from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            ✨ Ta création est prête !
-          </h2>
 
           {/* Comparaison Avant/Après */}
-          <div className="w-full bg-white rounded-xl shadow-2xl p-6">
-            <h3 className="text-xl font-bold text-center mb-6 text-gray-800">Avant → Après</h3>
+          <div className="w-full p-6 flex flex-col gap-3">
+            <h4 className="text-center mb-6 text-black">Votre Création</h4>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Original */}
               <div>
-                <p className="text-sm font-semibold text-gray-600 mb-2 text-center">✏️ Ton dessin original</p>
                 {uploadedUrl && (
                   <div className="relative w-full h-80 border-2 border-gray-300 rounded-lg overflow-hidden">
                     <Image
@@ -379,9 +349,8 @@ export default function DrawCanvas() {
 
               {/* IA */}
               <div>
-                <p className="text-sm font-semibold text-purple-600 mb-2 text-center">🤖 Version {styles[selectedStyle].name}</p>
                 {aiImageUrl && (
-                  <div className="relative w-full h-80 border-4 border-purple-400 rounded-lg overflow-hidden shadow-xl">
+                  <div className="relative w-full h-80 border-4 border-accent rounded-lg overflow-hidden shadow-xl">
                     <Image
                       src={aiImageUrl}
                       alt="Version IA"
@@ -395,8 +364,8 @@ export default function DrawCanvas() {
 
             {/* Description poétique */}
             {poeticDescription && (
-              <div className="mt-6 p-4  from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500">
-                <p className="text-gray-700 italic text-lg leading-relaxed text-center">
+              <div className="p-4 rounded-lg border-l-4 border-accent">
+                <p className="text-black italic leading-relaxed text-center">
                   "{poeticDescription}"
                 </p>
               </div>
@@ -409,9 +378,10 @@ export default function DrawCanvas() {
                   href={uploadedUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline font-semibold"
                 >
-                  📥 Télécharger l'original
+                    <button className='p-3 bg-accent text-white hover:scale-105 rounded-lg cursor-pointer transition'>
+                  Télécharger l'original
+                  </button>
                 </a>
               )}
               {aiImageUrl && (
@@ -419,143 +389,19 @@ export default function DrawCanvas() {
                   href={aiImageUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-purple-600 hover:underline font-semibold"
+                  
                 >
-                  📥 Télécharger la version IA
+                  <button className='p-3 bg-accent text-white hover:scale-105 rounded-lg cursor-pointer transition'>
+                  Télécharger version ia
+                  </button>
                 </a>
               )}
             </div>
           </div>
-
-          {/* Bouton recommencer */}
-          <button 
-            onClick={handleRestart}
-            className="px-8 py-4 cursor-pointer  from-green-500 to-teal-500 text-white rounded-xl font-bold text-lg transition hover:shadow-xl hover:scale-105"
-          >
-            🎨 Créer un nouveau dessin
-          </button>
         </div>
       )}
 
-      {/* GALERIES (toujours visibles en bas) */}
-      <div className="w-full max-w-7xl mt-20 border-t-2 border-gray-200 pt-12">
-        {/* GALERIE IMAGES IA */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center  from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            ✨ Galerie des transformations IA
-          </h2>
-          
-          {loadingGalleryAI ? (
-            <p className="text-center text-gray-500">Chargement...</p>
-          ) : galleryAI.length === 0 ? (
-            <p className="text-center text-gray-500">Aucune création pour le moment 🎨</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {galleryAI.map((aiImage: any) => {
-                const originalUrl = aiImage.context?.original_url || null
-                const poeticDesc = aiImage.poetic_description || 
-                                 aiImage.context?.poetic_description ||
-                                 null
-                
-                return (
-                  <div 
-                    key={aiImage.public_id}
-                    className="border-2 border-purple-300 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition bg-white"
-                  >
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold text-purple-700 mb-4 text-center">
-                        Avant → Après
-                      </h3>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <p className="text-xs text-gray-600 font-semibold text-center">✏️ Original</p>
-                          {originalUrl ? (
-                            <div className="relative w-full h-48 border-2 border-gray-300 rounded-lg overflow-hidden">
-                              <Image
-                                src={originalUrl}
-                                alt="Original"
-                                fill
-                                className="object-contain"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center">
-                              <p className="text-gray-400 text-xs">Non disponible</p>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="space-y-2">
-                          <p className="text-xs text-purple-600 font-semibold text-center">🤖 IA</p>
-                          <div className="relative w-full h-48 border-2 border-purple-300 rounded-lg overflow-hidden">
-                            <Image
-                              src={aiImage.secure_url}
-                              alt="IA"
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {poeticDesc && (
-                      <div className="px-4 pb-4">
-                        <div className="p-3 bg-purple-50 rounded-lg">
-                          <p className="text-sm text-gray-700 italic">"{poeticDesc}"</p>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="px-4 pb-4 text-center">
-                      <p className="text-xs text-gray-500">
-                        {new Date(aiImage.created_at).toLocaleDateString('fr-FR')}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* GALERIE DESSINS ORIGINAUX */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-            🎨 Galerie des dessins originaux
-          </h2>
-          
-          {loadingGallery ? (
-            <p className="text-center text-gray-500">Chargement...</p>
-          ) : gallery.length === 0 ? (
-            <p className="text-center text-gray-500">Aucun dessin pour le moment ✏️</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gallery.map((image) => (
-                <div 
-                  key={image.public_id}
-                  className="border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-white"
-                >
-                  <div className="relative w-full h-64">
-                    <Image
-                      src={image.secure_url}
-                      alt="Dessin"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-xs text-gray-500">
-                      {new Date(image.created_at).toLocaleDateString('fr-FR')}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </>
+      
+    </main>
   )
 }
