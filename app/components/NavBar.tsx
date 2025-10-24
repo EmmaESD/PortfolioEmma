@@ -52,6 +52,20 @@ export default function NavBar() {
           </Link>
 
           <Link 
+            href="/artify" 
+            className="relative text-black px-4 lg:px-6 py-3 group text-sm lg:text-base"
+          >
+            <span 
+              className="absolute inset-0 opacity-0 group-hover:opacity-70 transition-opacity duration-300 -z-10"
+              style={{ 
+                backgroundColor: 'var(--color-accent)',
+                filter: 'blur(50px)' 
+              }}
+            />
+            ARTIFY
+          </Link>
+
+          <Link 
             href="mailto:&#101;&#109;&#109;&#97;&#46;&#118;&#97;&#121;&#115;&#115;&#101;&#46;&#98;&#64;&#111;&#117;&#116;&#108;&#111;&#111;&#107;&#46;&#102;&#114;" 
             className="text-white px-4 lg:px-[20px] py-2 lg:py-[10px] rounded-xl transition-colors text-sm lg:text-base"
             target="_blank"
@@ -113,6 +127,15 @@ export default function NavBar() {
             style={{ color: 'var(--color-dark)' }}
           >
             MES PROJETS
+          </Link>
+
+          <Link 
+            href="/artify" 
+            className="text-black text-xl font-medium hover:opacity-70 transition-opacity"
+            onClick={() => setIsMenuOpen(false)}
+            style={{ color: 'var(--color-dark)' }}
+          >
+            ARTIFY
           </Link>
 
           <Link 

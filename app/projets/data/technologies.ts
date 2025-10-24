@@ -30,4 +30,6 @@ export const TECHNOLOGIES: Record<string, Technology> = {
   mapbox: { id: "mapbox", name: "Mapbox", icon: "/assets/technos/mapbox.svg" },
   tiled: { id: "tiled", name: "TiledMap", icon: "/assets/technos/tiled.svg" },
   expo: { id: "expo", name: "Expo", icon: "/assets/technos/expo.svg" },
+  openai: { id: "openai", name: "OpenAI", icon: "/assets/technos/openai.svg" },
+  cloudinary: { id: "cloudinary", name: "Cloudinary", icon: "/assets/technos/cloudinary.svg" },
 };
