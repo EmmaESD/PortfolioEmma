@@ -21,7 +21,11 @@ interface CloudinaryImage {
   }
 }
 
-export default function DrawCanvas() {
+interface DrawCanvasProps {
+  onImageTransformed?: () => void
+}
+
+export default function DrawCanvas({ onImageTransformed }: DrawCanvasProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null)
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
   const [uploading, setUploading] = useState(false)
@@ -189,6 +193,7 @@ export default function DrawCanvas() {
         setPoeticDescription(data.poeticDescription)
         setCurrentStep(3) // Passer à l'étape 3
         await loadGalleryAI()
+        onImageTransformed?.()
       } else {
         alert('Erreur lors de la transformation : ' + data.error)
       }

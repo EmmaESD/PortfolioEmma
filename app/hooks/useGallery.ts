@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-interface CloudinaryImage {
+export interface CloudinaryImage {
   public_id: string
   secure_url: string
   created_at: string
@@ -16,7 +16,8 @@ interface CloudinaryImage {
   poetic_description?: string
 }
 
-export function useGallery() {
+// 👇 NOUVEAU : Ajouter un paramètre triggerReload
+export function useGallery(triggerReload?: number) {
   const [galleryAI, setGalleryAI] = useState<CloudinaryImage[]>([])
   const [loadingGalleryAI, setLoadingGalleryAI] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -46,6 +47,13 @@ export function useGallery() {
   useEffect(() => {
     loadGalleryAI()
   }, [])
+
+  // 👇 NOUVEAU : Recharger quand triggerReload change
+  useEffect(() => {
+    if (triggerReload && triggerReload > 0) {
+      loadGalleryAI()
+    }
+  }, [triggerReload])
 
   // Fonction pour recharger manuellement
   const reloadGallery = () => {

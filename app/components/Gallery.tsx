@@ -1,27 +1,14 @@
 'use client'
 
-import { useEffect, useState } from "react"
 import { GalleryCard } from "./CardGallery"
 import { useGallery } from "../hooks/useGallery"
 
-interface CloudinaryImage {
-  public_id: string
-  secure_url: string
-  created_at: string
-  width: number
-  height: number
-  context?: {
-    custom?: {
-      original_drawing?: string
-      original_url?: string
-      poetic_description?: string
-    }
-    poetic_description?: string
-  }
+interface GalleryProps {
+  triggerReload?: number // 👈 Prop pour déclencher le reload
 }
 
-export default function Gallery( ) {
-  const { galleryAI, loadingGalleryAI, error, reloadGallery } = useGallery()
+export default function Gallery({ triggerReload }: GalleryProps) {
+  const { galleryAI, loadingGalleryAI, error, reloadGallery } = useGallery(triggerReload)
     return (
         <div className="w-full">
             <div className="mb-16 flex flex-col gap-16">
