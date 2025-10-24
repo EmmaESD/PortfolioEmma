@@ -8,7 +8,7 @@ interface ProjectProps {
 
 export default function CardProject({ project }: ProjectProps) {
     return (
-        <div className="group relative h-50 overflow-hidden rounded-xl cursor-pointer typography p-2">
+        <div className="z-10 group relative h-50 overflow-hidden rounded-xl cursor-pointer typography p-2">
             {/* Image */}
             <Image
                 src={project.image}

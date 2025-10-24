@@ -74,7 +74,7 @@ export const projects: Project[] = [
   {
     slug: "portfolio",
     title: "Mon Portfolio",
-    date: new Date("2025-10-25"),
+    date: new Date("2025-10-22"),
     longDescription: "Mon nouveau portfolio a été entièrement repensé et développé avec Next.js afin de mieux refléter mes compétences en design et en développement web. J’ai voulu créer un espace qui me ressemble — à la fois sobre, intuitif et moderne — mettant en avant mes projets, mon parcours et ma polyvalence entre création visuelle et technique. Ce projet m’a permis de combiner mes savoir-faire en UX/UI design et en intégration front-end, tout en explorant les possibilités offertes par Next.js pour offrir une navigation fluide, rapide et optimisée. Plus qu’un simple site vitrine, ce portfolio est une véritable vitrine interactive de mon évolution, de mes inspirations et de ma démarche de développeuse fullstack.",
     technologies: [ TECHNOLOGIES.figma, TECHNOLOGIES.nextjs, TECHNOLOGIES.tailwind, TECHNOLOGIES.ts],
     githubUrl: "https://github.com/EmmaESD/PortfolioEmma",
@@ -91,5 +91,16 @@ export const projects: Project[] = [
     demoVideo: "/assets/videos/video_pokedev.mp4",
     image: "/assets/projects-img/pokedev.png",
     category: "école",
+  },
+  {
+    slug: "artify",
+    title: "Artify",
+    date: new Date("2025-10-24"),
+    longDescription:"Artify est une fonctionnalité immersive intégrée à mon portfolio. Elle permet à chaque visiteur de réaliser un dessin — même un simple gribouillis — puis de le transformer en une œuvre d’art générée par l’IA. Le concept repose sur une idée qui me tient à cœur : offrir à chacun la possibilité de laisser une trace artistique unique de son passage. Chaque création est accompagnée d’une courte description poétique, elle aussi générée par l’intelligence artificielle, afin de sublimer l’interprétation de l’image. Les œuvres générées rejoignent ensuite une galerie publique, témoin de la diversité des visiteurs et de leur imagination.",
+    technologies: [ TECHNOLOGIES.figma, TECHNOLOGIES.nextjs, TECHNOLOGIES.ts, TECHNOLOGIES.tailwind, TECHNOLOGIES.openai, TECHNOLOGIES.cloudinary],
+    githubUrl: "https://github.com/EmmaESD/PortfolioEmma",
+    demoUrl: "/artify",
+    image: "/assets/projects-img/artify.png",
+    category: "perso",
   },
 ];

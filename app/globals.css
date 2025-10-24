@@ -21,7 +21,6 @@ html, body {
 /* Variables CSS - Mobile par défaut */
 :root {
     
-    
     /* Tailles de texte - Mobile par défaut */
     --text-xs: 0.875rem;    /* 14px */
     --text-sm: 1rem;        /* 16px */
