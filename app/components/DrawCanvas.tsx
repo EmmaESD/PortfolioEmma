@@ -23,6 +23,7 @@ interface CloudinaryImage {
 
 export default function DrawCanvas() {
   const canvasRef = useRef<ReactSketchCanvasRef>(null)
+  const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
   const [uploading, setUploading] = useState(false)
   const [transforming, setTransforming] = useState(false)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
@@ -55,6 +56,25 @@ export default function DrawCanvas() {
       prompt: "retro pixel art style with clean pixels, vibrant colors and video game aesthetic"
     },
   }
+
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      const width = window.innerWidth
+      
+      if (width < 640) { // Mobile
+        setCanvasSize({ width: width - 80, height: 400 })
+      } else if (width < 1024) { // Tablet
+        setCanvasSize({ width: 600, height: 450 })
+      } else { // Desktop
+        setCanvasSize({ width: 800, height: 600 })
+      }
+    }
+
+    updateCanvasSize()
+    window.addEventListener('resize', updateCanvasSize)
+    
+    return () => window.removeEventListener('resize', updateCanvasSize)
+  }, [])
 
   type StyleKey = keyof typeof styles
   const [selectedStyle, setSelectedStyle] = useState<StyleKey>('realistic')
@@ -181,12 +201,12 @@ export default function DrawCanvas() {
   }
 
   return (
-    <main className='flex flex-col items-center gap-8 px-12 w-full'>
+    <main className='flex flex-col items-center gap-8 w-full'>
       {/* Indicateur d'étapes */}
-      <div className="w-full px-44">
-        <div className="flex items-center justify-between">
+      <div className="w-full lg:px-30 ">
+        <div className="flex items-center justify-between w-full">
           {/* Étape 1 */}
-          <div className="flex flex-col items-center flex-1">
+          <div className="flex flex-col items-center">
             <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
               currentStep >= 1 ? 'bg-accent text-white' : 'bg-gray-300 text-black'
             }`}>
@@ -212,7 +232,7 @@ export default function DrawCanvas() {
             <p className={`w-full text-center ${
               currentStep >= 2 ? 'text-accent' : 'text-black'
             }`}>
-              Choisir le style
+              Styliser
             </p>
           </div>
 
@@ -237,9 +257,9 @@ export default function DrawCanvas() {
 
       {/* ÉTAPE 1 : ZONE DE DESSIN */}
       {currentStep === 1 && (
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 px-10">
           <h4>Laissez votre empreinte</h4>
-          <p>Attention, vous ne disposez que d&apos;un seul essai !</p>
+          <p className='text-center'>Attention, vous ne disposez que d&apos;un seul essai !</p>
           
           <div className="border-4 border-black rounded-lg shadow-2xl overflow-hidden bg-white">
             <ReactSketchCanvas
@@ -247,8 +267,8 @@ export default function DrawCanvas() {
               strokeWidth={3}
               strokeColor="#000000"
               canvasColor="#FFFFFF"
-              width="600px"
-              height="400px"
+              width={`${canvasSize.width}px`}
+              height={`${canvasSize.height}px`}
             />
           </div>
 
