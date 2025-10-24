@@ -302,7 +302,7 @@ export default function DrawCanvas({ onImageTransformed }: DrawCanvasProps) {
             <div className='flex justify-center w-full gap-8 items-center'>
           {/* Aperçu du dessin */}
           {uploadedUrl && (
-            <div className="relative w-96 h-80 border-2 border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
+            <div className="relative w-96 h-80 border-2 border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg flex">
               <Image
                 src={uploadedUrl}
                 alt="Ton dessin"
@@ -313,7 +313,7 @@ export default function DrawCanvas({ onImageTransformed }: DrawCanvasProps) {
           )}
 
           {/* Grille de styles */}
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-2">
+          <div className="grid grid-col-1 md:grid-cols-2 gap-2">
             {(Object.keys(styles) as StyleKey[]).map((key) => {
               const style = styles[key]
               return (
