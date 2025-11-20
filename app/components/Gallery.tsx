@@ -14,7 +14,7 @@ export default function Gallery({ triggerReload }: GalleryProps) {
             <div className="mb-16 flex flex-col gap-16">
                 <div className="flex flex-col gap-5">
                     <h2 className=" text-center">
-                      Gallerie
+                      Galerie
                     </h2>
                     <p className="text-center">Ici, chaque création capture un instant de passage.</p>
                 </div>
